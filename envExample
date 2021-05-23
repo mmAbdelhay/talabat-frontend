@@ -1,0 +1,5 @@
+create file in your root called => .env.local 
+paste this line to it :
+REACT_APP_BASE_URL='http://localhost:8000/'
+
+note : every env variable should be capital and start with REACT_APP_

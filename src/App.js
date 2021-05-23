@@ -1,7 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [Url, setUrl] = useState('');
+
+  useEffect(()=>{
+    setUrl(process.env.REACT_APP_BASE_URL);
+    console.log(Url);
+  },[Url])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +25,7 @@ function App() {
         >
           Learn React
         </a>
+        <h3>{Url}</h3>
       </header>
     </div>
   );
