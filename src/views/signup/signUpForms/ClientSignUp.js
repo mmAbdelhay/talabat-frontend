@@ -1,33 +1,43 @@
 import { ServerIP } from "../../../assets/config";
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Input, Button, Select, Typography } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Select,
+  Typography,
+  DatePicker,
+  Space,
+} from "antd";
 import {
   UnlockOutlined,
   UserOutlined,
   DownCircleTwoTone,
 } from "@ant-design/icons";
+import moment from "moment";
 import "antd/dist/antd.css";
+import CountrySelector from "../../sharedComponents/CountrySelector";
 
 const { Option } = Select;
 const { Title } = Typography;
 
-export default function LoginForm() {
-  const [form] = Form.useForm();
+export default function ClientSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [name, setName] = useState("");
+  const [gender, setGender] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
 
   const login = () => {
     axios
-      .post(`${ServerIP}/api/v1/${role}/authenticate/login`, {
+      .post(`${ServerIP}/api/v1/client/authenticate/login`, {
         email: email,
         password: password,
       })
       .then((res) => {
-        console.log(JSON.stringify(res.data.token));
-        localStorage.setItem("token", res.data.token);
-        window.location.href = "/";
+        console.log(res, res.data.token);
+        alert(res.data.Message);
       })
       .catch((err) => {
         console.log(err);
@@ -36,15 +46,31 @@ export default function LoginForm() {
 
   return (
     <>
-      <Title level={5}>Login page</Title>
+      <Title level={5}>Client signup</Title>
       <Form
         name="basic"
-        shouldUpdate
-        form={form}
         initialValues={{
           remember: true,
         }}
       >
+        <Form.Item
+          name="name"
+          rules={[
+            {
+              required: true,
+              message: "Please input your name!",
+            },
+            {
+              type: "text",
+              message: "name should be a characters only",
+            },
+          ]}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        >
+          <Input prefix={<UserOutlined />} placeholder="Name" />
+        </Form.Item>
         <Form.Item
           name="email"
           rules={[
@@ -81,43 +107,45 @@ export default function LoginForm() {
         >
           <Input.Password prefix={<UnlockOutlined />} placeholder="Password" />
         </Form.Item>
+        <Form.Item>
+          <Space direction="vertical">
+            <DatePicker
+              placeholder="date of birth"
+              format="YYYY-MM-DD"
+              onChange={(date, dateString) => {
+                setDateOfBirth(dateString);
+              }}
+            />
+          </Space>
+        </Form.Item>
         <Form.Item
           name="role"
           rules={[
             {
               required: true,
-              message: "please select your role",
+              message: "please select your gender",
             },
           ]}
         >
           <Select
-            placeholder="Select your role"
+            placeholder="Select your gender"
             suffixIcon={<DownCircleTwoTone />}
             allowClear
-            onChange={(role) => {
-              setRole(role);
+            onChange={(gender) => {
+              setGender(gender);
             }}
           >
-            <Option value="client">Client</Option>
-            <Option value="provider">Provider</Option>
-            <Option value="superuser">Superuser</Option>
+            <Option value="Male">Male</Option>
+            <Option value="Female">Female</Option>
           </Select>
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            block
-            htmlType="submit"
-            onClick={login}
-            disabled={
-              !form.isFieldsTouched(true) ||
-              !!form.getFieldsError().filter(({ errors }) => errors.length)
-                .length
-            }
-          >
-            Login
-          </Button>
+          <Space direction="vertical">
+            <Button type="primary" block htmlType="submit" onClick={login}>
+              SignUp
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </>
