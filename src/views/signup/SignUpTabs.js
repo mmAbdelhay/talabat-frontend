@@ -11,7 +11,7 @@ export default function SignUpTabs() {
   return (
     <div>
       <Title level={5}> Signup page </Title>{" "}
-      <Tabs defaultActiveKey="2">
+      <Tabs defaultActiveKey="1">
         <TabPane
           tab={
             <span>

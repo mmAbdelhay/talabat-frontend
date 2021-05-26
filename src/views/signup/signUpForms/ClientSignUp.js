@@ -1,25 +1,16 @@
 import { ServerIP } from "../../../assets/config";
 import React, { useState } from "react";
 import axios from "axios";
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  Typography,
-  DatePicker,
-  Space,
-} from "antd";
-import {
-  UnlockOutlined,
-  UserOutlined,
-  DownCircleTwoTone,
-} from "@ant-design/icons";
-import moment from "moment";
+import { Form, Button, Typography, Space } from "antd";
 import "antd/dist/antd.css";
 import CountrySelector from "../../sharedComponents/CountrySelector";
+import MobileInput from "../../sharedComponents/FormInputs/MobileInput";
+import NameInput from "../../sharedComponents/FormInputs/NameInput";
+import PasswordInput from "../../sharedComponents/FormInputs/PasswordInput";
+import EmailInput from "../../sharedComponents/FormInputs/EmailInput";
+import DateOfBirth from "../../sharedComponents/FormInputs/DateOfBirth";
+import GenderInput from "../../sharedComponents/FormInputs/GenderInput";
 
-const { Option } = Select;
 const { Title } = Typography;
 
 export default function ClientSignUp() {
@@ -28,15 +19,24 @@ export default function ClientSignUp() {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
+  const [country, setCountry] = useState("");
+  const [mobile, setMobile] = useState("");
 
-  const login = () => {
+  const signUp = () => {
+    console.log("inside signUp");
+    console.log(name, email, password, gender, country, mobile, dateOfBirth);
     axios
-      .post(`${ServerIP}/api/v1/client/authenticate/login`, {
+      .post(`${ServerIP}/api/v1/client/authenticate/register`, {
+        name: name,
         email: email,
         password: password,
+        gender: gender,
+        country: country,
+        mobile: mobile,
+        date_of_birth: dateOfBirth,
       })
       .then((res) => {
-        console.log(res, res.data.token);
+        console.log(res.data);
         alert(res.data.Message);
       })
       .catch((err) => {
@@ -47,102 +47,21 @@ export default function ClientSignUp() {
   return (
     <>
       <Title level={5}>Client signup</Title>
-      <Form
-        name="basic"
-        initialValues={{
-          remember: true,
-        }}
-      >
-        <Form.Item
-          name="name"
-          rules={[
-            {
-              required: true,
-              message: "Please input your name!",
-            },
-            {
-              type: "text",
-              message: "name should be a characters only",
-            },
-          ]}
-          onChange={(e) => {
-            setName(e.target.value);
+      <Form name="basic">
+        <NameInput onNameInputChange={(value) => setName(value)} />
+        <EmailInput onEmailInputChange={(value) => setEmail(value)} />
+        <PasswordInput onPasswordInputChange={(value) => setPassword(value)} />
+        <MobileInput onMobileInputChange={(value) => setMobile(value)} />
+        <CountrySelector
+          onSelectCountry={(value) => {
+            setCountry(value.label);
           }}
-        >
-          <Input prefix={<UserOutlined />} placeholder="Name" />
-        </Form.Item>
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email!",
-            },
-            {
-              type: "email",
-              message: "The input is not valid E-mail!",
-            },
-          ]}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        >
-          <Input prefix={<UserOutlined />} placeholder="Email" />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-            {
-              min: 6,
-              message: "password should be 6 characters or more",
-            },
-          ]}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        >
-          <Input.Password prefix={<UnlockOutlined />} placeholder="Password" />
-        </Form.Item>
+        />
+        <DateOfBirth onSelectDateOfBirth={(value) => setDateOfBirth(value)} />
+        <GenderInput onGenderChange={(value) => setGender(value)} />
         <Form.Item>
           <Space direction="vertical">
-            <DatePicker
-              placeholder="date of birth"
-              format="YYYY-MM-DD"
-              onChange={(date, dateString) => {
-                setDateOfBirth(dateString);
-              }}
-            />
-          </Space>
-        </Form.Item>
-        <Form.Item
-          name="role"
-          rules={[
-            {
-              required: true,
-              message: "please select your gender",
-            },
-          ]}
-        >
-          <Select
-            placeholder="Select your gender"
-            suffixIcon={<DownCircleTwoTone />}
-            allowClear
-            onChange={(gender) => {
-              setGender(gender);
-            }}
-          >
-            <Option value="Male">Male</Option>
-            <Option value="Female">Female</Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item>
-          <Space direction="vertical">
-            <Button type="primary" block htmlType="submit" onClick={login}>
+            <Button type="primary" htmlType="submit" onClick={signUp}>
               SignUp
             </Button>
           </Space>
