@@ -23,8 +23,6 @@ export default function ClientSignUp() {
   const [mobile, setMobile] = useState("");
 
   const signUp = () => {
-    console.log("inside signUp");
-    console.log(name, email, password, gender, country, mobile, dateOfBirth);
     axios
       .post(`${ServerIP}/api/v1/client/authenticate/register`, {
         name: name,
@@ -40,6 +38,7 @@ export default function ClientSignUp() {
         alert(res.data.Message);
       })
       .catch((err) => {
+        alert("form is invalid");
         console.log(err);
       });
   };

@@ -18,7 +18,7 @@ export default function MobileInput(props) {
 
   const changePhone = (value) => {
     let phone = value.target.value;
-    if (phone.charAt(0) === "0") phone = phone.substr(1, phone.length);
+    if (phone.charAt(0) === "0") phone = phone.substring(1, phone.length);
     setMobile(phone);
   };
 
@@ -37,7 +37,7 @@ export default function MobileInput(props) {
         onChange={prefixHandler}
       >
         {prefixNumber.map((value, index) => {
-          let trueValue = value.substring(value.indexOf("+") - 1, value.length);
+          let trueValue = value.substring(value.indexOf("+"), value.length);
           return (
             <Option value={trueValue} key={index}>
               {value}
