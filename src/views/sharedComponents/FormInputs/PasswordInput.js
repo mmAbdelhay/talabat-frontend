@@ -10,6 +10,7 @@ export default function PasswordInput(props) {
   return (
     <Form.Item
       name="password"
+      label="Password"
       rules={[
         {
           required: true,

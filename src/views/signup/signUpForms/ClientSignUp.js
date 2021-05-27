@@ -1,7 +1,7 @@
 import { ServerIP } from "../../../assets/config";
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Button, Typography, Space } from "antd";
+import { Form, Button } from "antd";
 import "antd/dist/antd.css";
 import CountrySelector from "../../sharedComponents/CountrySelector";
 import MobileInput from "../../sharedComponents/FormInputs/MobileInput";
@@ -10,8 +10,6 @@ import PasswordInput from "../../sharedComponents/FormInputs/PasswordInput";
 import EmailInput from "../../sharedComponents/FormInputs/EmailInput";
 import DateOfBirth from "../../sharedComponents/FormInputs/DateOfBirth";
 import GenderInput from "../../sharedComponents/FormInputs/GenderInput";
-
-const { Title } = Typography;
 
 export default function ClientSignUp() {
   const [email, setEmail] = useState("");
@@ -39,14 +37,14 @@ export default function ClientSignUp() {
       })
       .catch((err) => {
         alert("form is invalid");
+        window.location.href = "/login";
         console.log(err);
       });
   };
 
   return (
     <>
-      <Title level={5}>Client signup</Title>
-      <Form name="basic">
+      <Form name="basic" style={{ width: "70%" }}>
         <NameInput onNameInputChange={(value) => setName(value)} />
         <EmailInput onEmailInputChange={(value) => setEmail(value)} />
         <PasswordInput onPasswordInputChange={(value) => setPassword(value)} />
@@ -59,11 +57,9 @@ export default function ClientSignUp() {
         <DateOfBirth onSelectDateOfBirth={(value) => setDateOfBirth(value)} />
         <GenderInput onGenderChange={(value) => setGender(value)} />
         <Form.Item>
-          <Space direction="vertical">
-            <Button type="primary" htmlType="submit" onClick={signUp}>
-              SignUp
-            </Button>
-          </Space>
+          <Button block type="primary" htmlType="submit" onClick={signUp}>
+            SignUp
+          </Button>
         </Form.Item>
       </Form>
     </>

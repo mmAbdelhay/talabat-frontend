@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import Select from "react-select";
 import countryList from "react-select-country-list";
 import { Form } from "antd";
@@ -11,7 +11,7 @@ function CountrySelector(props) {
   };
 
   return (
-    <Form.Item>
+    <Form.Item label="Select your Country">
       <Select
         options={options}
         placeholder="select your country"

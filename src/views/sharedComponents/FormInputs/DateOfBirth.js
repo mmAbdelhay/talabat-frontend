@@ -12,6 +12,7 @@ export default function DateOfBirthInput(props) {
         <DatePicker
           placeholder="date of birth"
           format="YYYY-MM-DD"
+          style={{ width: "427.5%" }}
           onChange={changeHandler}
         />
       </Space>

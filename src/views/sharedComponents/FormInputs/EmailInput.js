@@ -10,6 +10,7 @@ export default function EmailInput(props) {
   return (
     <Form.Item
       name="email"
+      label="Email"
       rules={[
         {
           required: true,

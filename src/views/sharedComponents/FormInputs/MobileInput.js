@@ -14,7 +14,7 @@ export default function MobileInput(props) {
       setValidMobileValue(prefix + mobile);
       props.onMobileInputChange(validMobileValue);
     }
-  });
+  }, [mobile, prefix, props, validMobileValue]);
 
   const changePhone = (value) => {
     let phone = value.target.value;

@@ -10,6 +10,7 @@ export default function NameInput(props) {
   return (
     <Form.Item
       name="name"
+      label="Name"
       rules={[
         {
           required: true,
