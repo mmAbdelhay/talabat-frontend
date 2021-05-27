@@ -1,7 +1,7 @@
 import { ServerIP } from "../../../assets/config";
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Input, Button, Select, Typography } from "antd";
+import { Form, Input, Button, Select, Typography, message } from "antd";
 import {
   UnlockOutlined,
   UserOutlined,
@@ -26,10 +26,13 @@ export default function LoginForm() {
       })
       .then((res) => {
         console.log(JSON.stringify(res.data.token));
+        message.success("logged in successfully");
         localStorage.setItem("token", res.data.token);
+        sessionStorage.setItem("role", role);
         window.location.href = "/";
       })
       .catch((err) => {
+        message.error("form is invalid");
         console.log(err);
       });
   };

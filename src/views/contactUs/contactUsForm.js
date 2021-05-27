@@ -11,7 +11,6 @@ const { TextArea } = Input;
 const { Title } = Typography;
 
 export default function ContactUsForm() {
-  const [form] = Form.useForm();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -44,20 +43,11 @@ export default function ContactUsForm() {
           <TextArea
             placeholder="Fell free to tell us what you want"
             rows={4}
-            onChange={(value) => setMsg(value)}
+            onChange={(value) => setMsg(value.target.value)}
           />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={contactus}
-            disabled={
-              !form.isFieldsTouched(true) ||
-              !!form.getFieldsError().filter(({ errors }) => errors.length)
-                .length
-            }
-          >
+          <Button type="primary" htmlType="submit" onClick={contactus}>
             send
           </Button>
         </Form.Item>
