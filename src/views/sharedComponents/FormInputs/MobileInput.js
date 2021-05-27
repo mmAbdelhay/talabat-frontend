@@ -51,6 +51,7 @@ export default function MobileInput(props) {
   return (
     <Form.Item
       name={"phone"}
+      label="Mobile"
       rules={[
         {
           required: true,

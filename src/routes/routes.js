@@ -4,6 +4,7 @@ import { checkIfLoggedIn } from "../services/CheckUserStatus";
 import App from "../App";
 import Signup from "../views/signup/SignUpTabs";
 import Login from "../views/login/loginForm/loginForm";
+import ContactUsForm from "../views/contactUs/contactUsForm";
 
 export default function Routes() {
   const [status] = checkIfLoggedIn();
@@ -17,6 +18,9 @@ export default function Routes() {
       </Route>
       <Route path="/signup" exact>
         <Signup />
+      </Route>
+      <Route path="/contactus" exact>
+        <ContactUsForm />
       </Route>
     </div>
   );

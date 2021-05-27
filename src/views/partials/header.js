@@ -22,6 +22,7 @@ export default function Header() {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="#home">Home</Nav.Link>
+          <Nav.Link href="/contactus">Contact us</Nav.Link>
         </Nav>
         <Nav>
           {!loginStatus ? (
