@@ -34,10 +34,10 @@ export default function ClientSignUp() {
       .then((res) => {
         console.log(res.data);
         alert(res.data.Message);
+        window.location.href = "/login";
       })
       .catch((err) => {
         alert("form is invalid");
-        window.location.href = "/login";
         console.log(err);
       });
   };
