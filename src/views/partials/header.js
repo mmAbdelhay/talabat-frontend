@@ -24,6 +24,7 @@ export default function Header() {
         <Nav className="mr-auto">
           <Nav.Link href="#home">Home</Nav.Link>
           <Nav.Link href="/contactus">Contact us</Nav.Link>
+          <Nav.Link href="/allRestaurants">all Restaurants</Nav.Link>
         </Nav>
         <Nav>
           {!loginStatus ? (

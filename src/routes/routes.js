@@ -5,6 +5,7 @@ import App from "../App";
 import Signup from "../views/signup/SignUpTabs";
 import Login from "../views/login/loginForm/loginForm";
 import ContactUsForm from "../views/contactUs/contactUsForm";
+import AllResturants from "../views/providers/allRestaurants";
 
 export default function Routes() {
   const [status] = checkIfLoggedIn();
@@ -21,6 +22,9 @@ export default function Routes() {
       </Route>
       <Route path="/contactus" exact>
         <ContactUsForm />
+      </Route>
+      <Route path="/allRestaurants" exact>
+        <AllResturants />
       </Route>
     </div>
   );
