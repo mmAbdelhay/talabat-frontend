@@ -5,6 +5,11 @@ import App from "../App";
 import Signup from "../views/signup/SignUpTabs";
 import Login from "../views/login/loginForm/loginForm";
 import ContactUsForm from "../views/contactUs/contactUsForm";
+import Feedback from "../views/feedback/feedback"
+import Privacy from "../views/privacy/privacy"
+import FAQ from "../views/FAQ/FAQ"
+import Terms from "../views/terms/Terms"
+
 
 export default function Routes() {
   const [status] = checkIfLoggedIn();
@@ -21,6 +26,18 @@ export default function Routes() {
       </Route>
       <Route path="/contactus" exact>
         <ContactUsForm />
+      </Route>
+      <Route path="/feedback" exact>
+        <Feedback />
+      </Route>
+      <Route path="/privacy" exact>
+        <Privacy />
+      </Route>
+      <Route path="/faq" exact>
+        <FAQ />
+      </Route>
+      <Route path="/terms" exact>
+        <Terms />
       </Route>
     </div>
   );

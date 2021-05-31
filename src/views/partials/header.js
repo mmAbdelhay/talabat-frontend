@@ -22,8 +22,15 @@ export default function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="/contactus">Contact us</Nav.Link>
+          <Link className="nav-link text-white" to="/">Home</Link>
+          <Link className="nav-link text-white" to="/contactus">Contact us</Link>
+          <Link className="nav-link text-white" to="/feedback">Feedback</Link>
+          <Link className="nav-link text-white" to="/privacy"> Privacy</Link>
+          <Link className="nav-link text-white" to="/terms"> Terms and Conditions</Link>
+          <Link className="nav-link text-white" to="/faq"> FAQ</Link>
+
+
+
         </Nav>
         <Nav>
           {!loginStatus ? (
