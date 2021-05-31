@@ -8,6 +8,22 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <style>
+      body {
+        animation: transitionIn 1s;
+      }
+
+      @keyframes transitionIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link
       rel="stylesheet"

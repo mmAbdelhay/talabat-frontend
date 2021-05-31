@@ -1,1 +1,3 @@
-"use strict";module.exports.ServerIP="https://localhost:5000";
+"use strict";
+
+module.exports.ServerIP = "http://localhost:5000";

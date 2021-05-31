@@ -10,6 +10,7 @@ import Privacy from "../views/privacy/privacy"
 import FAQ from "../views/FAQ/FAQ"
 import Terms from "../views/terms/Terms"
 
+import ClinetProfile from "../views/profiles/ClientProfile"
 
 export default function Routes() {
   const [status] = checkIfLoggedIn();
@@ -38,6 +39,9 @@ export default function Routes() {
       </Route>
       <Route path="/terms" exact>
         <Terms />
+      </Route>
+      <Route path="/myprofile" exact>
+        <ClinetProfile />
       </Route>
     </div>
   );

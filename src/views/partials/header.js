@@ -31,10 +31,13 @@ export default function Header() {
 
 
 
+          
+          <Nav.Link href="/contactus">Contact us</Nav.Link>
         </Nav>
         <Nav>
           {!loginStatus ? (
             <>
+             
               <Link to="/login" className="nav-item nav-link">
                 Login
               </Link>
@@ -43,9 +46,14 @@ export default function Header() {
               </Link>
             </>
           ) : (
+            <>
+            <Link to="/myprofile" className="nav-item nav-link">
+                account
+              </Link>
             <Link className="nav-item nav-link float-right" onClick={logout}>
               logout
             </Link>
+            </>
           )}
         </Nav>
       </Navbar.Collapse>
