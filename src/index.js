@@ -7,12 +7,11 @@ import Routes from "./routes/routes";
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
     <Router>
       <Header />
       <Routes></Routes>
     </Router>
-  </React.StrictMode>,
+  ,
   document.getElementById("root")
 );
 
