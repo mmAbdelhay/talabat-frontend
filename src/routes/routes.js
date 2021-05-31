@@ -29,10 +29,9 @@ export default function Routes() {
       <Route path="/contactus" exact>
         <ContactUsForm />
       </Route>
-<<<<<<< HEAD
       <Route path="/allRestaurants" exact>
         <AllResturants />
-=======
+      </Route>
       <Route path="/feedback" exact>
         <Feedback />
       </Route>
@@ -47,7 +46,6 @@ export default function Routes() {
       </Route>
       <Route path="/myprofile" exact>
         <ClinetProfile />
->>>>>>> 18b9d21056da252170144c9296ffb7b3a40fc492
       </Route>
     </div>
   );
