@@ -1,25 +1,20 @@
 import React from "react";
+import FileBase64 from "react-file-base64";
 
 export default function UploadLogoInput(props) {
-  const handleChange = (event) => {
+  const handleChange = (file) => {
     const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-    if (!allowedExtensions.exec(event.target.value)) {
+    if (!allowedExtensions.exec(file.name)) {
       alert("Invalid file type");
-      event.target.value = "";
       return false;
     } else {
-      props.onUploadLogoInputChange(event.target.files[0]);
+      props.onUploadLogoInputChange(file.base64);
     }
   };
   return (
-    <div class="input-group">
-      <label for="file">please upload your logo: </label>
-      <input
-        type="file"
-        style={{ width: "100%" }}
-        onChange={handleChange}
-        accept="image/png, image/jpeg, image/jpg"
-      />
+    <div className="input-group">
+      <label>Logo: </label>
+      <FileBase64 multiple={false} onDone={handleChange} />
     </div>
   );
 }
