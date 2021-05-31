@@ -12,6 +12,7 @@ export default function GenderInput(props) {
   return (
     <Form.Item
       name="gender"
+      label="Gender"
       rules={[
         {
           required: true,

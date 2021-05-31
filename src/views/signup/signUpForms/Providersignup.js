@@ -28,23 +28,40 @@ export default function ProviderSignUp() {
   const [delivery_fee, setDelivery_fee] = useState("");
 
   const signUp = () => {
+    // const formData = new FormData();
+    // formData.append("email", email);
+    // formData.append("name", name);
+    // formData.append("latitude", latitude);
+    // formData.append("longitude", longitude);
+    // formData.append("provider_type", provider_type);
+    // formData.append("coverage_zone", coverage_zone);
+    // formData.append("opening_hour", opening_hour);
+    // formData.append("closing_hour", closing_hour);
+    // formData.append("delivery_fee", delivery_fee);
+    // formData.append("logo", logo);
+    // formData.append("minimum_order", minimum_order);
+    // formData.append("country", country);
+    // formData.append("delivery_time", delivery_time);
+
+    const payload = {
+      email: email,
+      password: password,
+      name: name,
+      latitude: latitude,
+      longitude: longitude,
+      provider_type: provider_type,
+      coverage_zone: coverage_zone,
+      opening_hour: opening_hour,
+      closing_hour: closing_hour,
+      delivery_fee: delivery_fee,
+      logo: logo,
+      minimum_order: minimum_order,
+      country: country,
+      delivery_time: delivery_time,
+    };
+    console.log(payload);
     axios
-      .post(`${ServerIP}/api/v1/provider/authenticate/register`, {
-        email: email,
-        password: password,
-        name: name,
-        latitude: latitude,
-        longitude: longitude,
-        provider_type: provider_type,
-        coverage_zone: coverage_zone,
-        opening_hour: opening_hour,
-        closing_hour: closing_hour,
-        delivery_fee: delivery_fee,
-        logo: logo,
-        minimum_order: minimum_order,
-        country: country,
-        delivery_time: delivery_time,
-      })
+      .post(`${ServerIP}/api/v1/provider/authenticate/register`, payload)
       .then((res) => {
         console.log(res, res.data.token);
         alert(res.data.Message);

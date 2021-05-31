@@ -8,7 +8,7 @@ let index = 0;
 
 export default class ProviderTypeInput extends React.Component {
   state = {
-    items: ["Resturant", "Grocery", "Pharmacy"],
+    items: ["Restaurant", "Store", "Pharmacy"],
     name: "",
   };
 
