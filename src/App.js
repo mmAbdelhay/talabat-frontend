@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { checkIfLoggedIn } from "./services/CheckUserStatus";
 import { checkRole } from "./services/CheckUserRole";
 import GetAllMessages from "./views/contactUs/GetAllMessages";
+import MapModal from './views/map/MapModal';
+import AutoComp from './views/map/AutoComp';
 
 function App() {
   const [token, setToken] = useState("");
@@ -16,7 +18,8 @@ function App() {
   }, []);
   return (
     <div className="container">
-      <h1 style={{ textAlign: "center" }}>Our fu*** App component</h1>
+      <AutoComp />
+      <MapModal />
       {isSuperUser && <GetAllMessages />}
     </div>
   );
