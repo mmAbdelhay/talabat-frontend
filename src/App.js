@@ -4,8 +4,8 @@ import { checkIfLoggedIn } from "./services/CheckUserStatus";
 import { checkRole } from "./services/CheckUserRole";
 import GetAllMessages from "./views/contactUs/GetAllMessages";
 import MapModal from './views/map/MapModal';
-import AutoComp from './views/map/AutoComp';
 
+import PlacesAutocomplete from './views/map/PlacesAutocomplete';
 function App() {
   const [token, setToken] = useState("");
   const [isSuperUser, setSuperUser] = useState(false);
@@ -18,7 +18,8 @@ function App() {
   }, []);
   return (
     <div className="container">
-      <AutoComp />
+      
+      <PlacesAutocomplete />
       <MapModal />
       {isSuperUser && <GetAllMessages />}
     </div>
