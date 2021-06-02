@@ -11,12 +11,14 @@
    width: 10em;
    height: 10em;
    margin-right: 3em;
+   
 }
 .provider_logo {
    height: 100%;
    max-width: 100%;
    display: block;
    margin: auto;
+   border-radius: 10px;
 }
 h1 {
    font-size: 2em;
