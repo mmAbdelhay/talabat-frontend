@@ -1,7 +1,5 @@
 export const checkRole = () => {
   const role =
-    sessionStorage.getItem("role") != null
-      ? sessionStorage.getItem("role")
-      : "";
+    localStorage.getItem("role") != null ? localStorage.getItem("role") : "";
   return role ? role : "";
 };

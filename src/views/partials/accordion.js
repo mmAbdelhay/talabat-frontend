@@ -8,7 +8,7 @@ const Accordion = ({callback, text, header, index}) => {
 
 
     return(
-        <>
+        <dev>
 
 
                 <Collapse onChange={callback}>
@@ -24,7 +24,7 @@ const Accordion = ({callback, text, header, index}) => {
                         <p>{text}</p>
                     </Panel>
                 </Collapse> */}
-        </>
+        </dev>
     )
 }
 

@@ -19,7 +19,13 @@ export default function NameInput(props) {
       ]}
       onChange={changeHandler}
     >
-      <Input prefix={<UserOutlined />} placeholder="Name" />
+      {props.value ? 
+      <Input prefix={<UserOutlined />}defaultValue={`${props.value}`} />
+
+      :
+      
+      <Input prefix={<UserOutlined />}placeholder="Name" />
+      }
     </Form.Item>
   );
 }

@@ -20,7 +20,18 @@ export default function GenderInput(props) {
         },
       ]}
     >
+      {props.value?
       <Select
+      placeholder="Select your gender"
+      suffixIcon={<DownCircleTwoTone />}
+      allowClear
+      onChange={changeHandler}
+      defaultValue={`${props.value}`}
+    >
+      <Option value="Male">Male</Option>
+      <Option value="Female">Female</Option>
+    </Select>
+      :<Select
         placeholder="Select your gender"
         suffixIcon={<DownCircleTwoTone />}
         allowClear
@@ -28,7 +39,8 @@ export default function GenderInput(props) {
       >
         <Option value="Male">Male</Option>
         <Option value="Female">Female</Option>
-      </Select>
+      </Select>}
+      
     </Form.Item>
   );
 }
