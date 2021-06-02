@@ -13,6 +13,7 @@ import Terms from "../views/terms/Terms";
 import ProviderProfile from "../views/providers/providerprofile/providerprofile";
 
 import ClinetProfile from "../views/profiles/ClientProfile";
+import AllNearestProviders from '../views/providers/nearestProviders/AllNearestProviders';
 
 export default function Routes() {
    const [status] = checkIfLoggedIn();
@@ -32,6 +33,9 @@ export default function Routes() {
          </Route>
          <Route path="/allRestaurants" exact>
             <AllResturants />
+         </Route>
+         <Route path="/nearestProvides" exact>
+            <AllNearestProviders />
          </Route>
          <Route path="/feedback" exact>
             <Feedback />
