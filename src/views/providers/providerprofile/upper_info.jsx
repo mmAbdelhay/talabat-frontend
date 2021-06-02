@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./providerProfile.module.css";
+import {ServerIP} from "../../../assets/config"
 
 export default function UpperInfo(props) {
    const [providerInformation, setProviderInformation] = useState();
@@ -12,7 +13,7 @@ export default function UpperInfo(props) {
          <div className={styles.provider_logo_holder}>
             <img
                className={styles.provider_logo}
-               src="http://localhost:5000/providers/images/KFC.png"
+               src={`${ServerIP}${providerInformation?.logo}`}
                alt="logo"
             />
          </div>

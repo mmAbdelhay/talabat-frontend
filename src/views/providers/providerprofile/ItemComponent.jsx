@@ -16,6 +16,7 @@ export default function ItemComponent(props) {
          id: item.id,
          quantity: 1,
          price: item.price,
+         itemPrice : item.price,
       };
       dispatch(defineProviderId(props?.providerId));
       dispatch(addToCart(itemToBeSaved));
