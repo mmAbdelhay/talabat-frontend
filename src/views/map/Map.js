@@ -16,23 +16,44 @@ class Map extends Component {
     super(props);
     this.state = {
       mapPosition: {
-        lat: parseFloat(localStorage.getItem("searchlat")),
-        lng: parseFloat(localStorage.getItem("searchlng")),
+        // lat: parseFloat(localStorage.getItem("searchlat")),
+        // lng: parseFloat(localStorage.getItem("searchlng")),
+        lat : props.nuLat ,
+        lng : props.nuLng
+        
       },
       markerPosition: {
-        lat: parseFloat(localStorage.getItem("searchlat")),
-        lng: parseFloat(localStorage.getItem("searchlng")),
+        // lat: parseFloat(localStorage.getItem("searchlat")),
+        // lng: parseFloat(localStorage.getItem("searchlng")),
+        lat : props.nuLat ,
+        lng : props.nuLng
       },
     };
   }
+ componentDidMount(){
+   this.setState({
+    mapPosition: {
+      lat: parseFloat(localStorage.getItem("searchlat")),
+      lng: parseFloat(localStorage.getItem("searchlng")),
+      
+    },
+    markerPosition: {
+      lat: parseFloat(localStorage.getItem("searchlat")),
+      lng: parseFloat(localStorage.getItem("searchlng")),
+     
+    },
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.markerPosition.lat !== this.props.center.lat) {
-      return true;
-    } else if (this.props.center.lat === nextProps.center.lat) {
-      return false;
-    }
-  }
+   })
+   console.log(this.state);
+ }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.state.markerPosition.lat !==  ) {
+  //     return true;
+  //   } else if (this.props.center.lat === nextProps.center.lat) {
+  //     return false;
+  //   }
+  // }
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -42,8 +63,7 @@ class Map extends Component {
   onMarkerDragEnd = (event) => {
     let newLat = event.latLng.lat(),
       newLng = event.latLng.lng();
-    console.log(newLat);
-    console.log(newLng);
+  
     Geocode.fromLatLng(newLat, newLng).then(
       (response) => {
         this.setState({
@@ -56,6 +76,9 @@ class Map extends Component {
             lng: newLng,
           },
         });
+        //console.log(this.state.lat);
+        this.props.onLatChange(this.state.markerPosition.lat);
+        this.props.onLngChange(this.state.markerPosition.lng);
       },
       (error) => {
         console.error(error);
@@ -75,19 +98,15 @@ class Map extends Component {
           }}
         >
           {/* InfoWindow on top of marker */}
-          <InfoWindow
+          {/* <InfoWindow
             onClose={this.onInfoWindowClose}
             position={{
-              lat: this.state.markerPosition.lat + 0.0018,
+              lat: this.state.markerPosition.lat ,
               lng: this.state.markerPosition.lng,
             }}
           >
-            <div>
-              <span style={{ padding: 0, margin: 0 }}>
-                {this.state.address}
-              </span>
-            </div>
-          </InfoWindow>
+            
+          </InfoWindow> */}
           {/*Marker*/}
           <Marker
             google={this.props.google}

@@ -1,1 +1,1 @@
-module.exports.GoogleMapsAPI = `AIzaSyBvSFdnbMkRWEQOsYiF4RnGL9qlBQESYsQ`;
+module.exports.GoogleMapsAPI = `4545454`;

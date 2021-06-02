@@ -3,8 +3,8 @@ import { Form, Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 export default function NameInput(props) {
-  const changeHandler = (value) => {
-    props.onNameInputChange(value.target.value);
+  const changeHandler = (event) => {
+    props.onNameInputChange(event.target.value);
   };
 
   return (
