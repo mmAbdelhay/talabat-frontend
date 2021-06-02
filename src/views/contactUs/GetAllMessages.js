@@ -36,7 +36,7 @@ export default function GetAllMessages() {
   };
 
   return (
-    <>
+    <dev>
       <Button
         type="primary"
         onClick={getAllMessages}
@@ -57,6 +57,6 @@ export default function GetAllMessages() {
             );
           })
         : index && <Alert message="you dont have messages yet" type="info" />}
-    </>
+    </dev>
   );
 }

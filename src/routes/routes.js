@@ -14,7 +14,10 @@ import ProviderProfile from "../views/providers/providerprofile/providerprofile"
 
 import ClinetProfile from "../views/profiles/ClientProfile";
 import AllNearestProviders from '../views/providers/nearestProviders/AllNearestProviders';
+import UnApprovedProviders from "../views/providers/unapproved/UnapprovedProviders";
 
+import { Provider } from "react-redux";
+import store from "./store";
 export default function Routes() {
    const [status] = checkIfLoggedIn();
    return (
@@ -55,6 +58,11 @@ export default function Routes() {
          <Route path="/providerprofile" exact>
             <ProviderProfile />
          </Route>
+         <Provider store={store}>
+            <Route path="/unapproved" exact>
+                <UnApprovedProviders />
+            </Route>
+         </Provider>
       </div>
    );
 }
