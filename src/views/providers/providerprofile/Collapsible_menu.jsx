@@ -36,16 +36,18 @@ export default function CollapsibleMenu(props) {
             <Panel header={catItem?.name} key={catItem?.id}>
               <p>
                 {catItem?.Items?.map((item) => {
-                  return (
-                    <>
-                      <ItemComponent
-                        item={item}
-                        key={item?.id}
-                        providerId={providerInformation.id}
-                      />
-                      <hr />
-                    </>
-                  );
+                  if (item?.availability) {
+                    return (
+                      <>
+                        <ItemComponent
+                          item={item}
+                          key={item?.id}
+                          providerId={providerInformation.id}
+                        />
+                        <hr />
+                      </>
+                    );
+                  }
                 })}
               </p>
             </Panel>

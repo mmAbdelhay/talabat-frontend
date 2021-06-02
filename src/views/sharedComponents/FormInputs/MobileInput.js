@@ -60,11 +60,19 @@ export default function MobileInput(props) {
       ]}
       onChange={changePhone}
     >
-      <Input
+     { props.value?
+     <Input
+     addonBefore={prefixSelector}
+     prefix={<MobileOutlined />}
+     placeholder="Mobile"
+     defaultValue={`${props.value}`}
+   />
+     :
+     <Input
         addonBefore={prefixSelector}
         prefix={<MobileOutlined />}
         placeholder="Mobile"
-      />
+      />}
     </Form.Item>
   );
 }
