@@ -16,6 +16,7 @@ export default function ProviderProfile() {
    useEffect(async () => {
       const returnedInformation = await getProviderInfo("b3b57ae8-7c05-4245-9770-40d61c9eff5e");
       setProviderInformation(returnedInformation?.data?.Provider);
+      console.log(providerInformation)
    }, []);
 
    return (
