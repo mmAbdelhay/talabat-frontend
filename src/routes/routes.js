@@ -13,6 +13,7 @@ import Terms from "../views/terms/Terms";
 import ProviderProfile from "../views/providers/providerprofile/providerprofile";
 
 import ClinetProfile from "../views/profiles/ClientProfile";
+import UnApprovedProviders from "../views/providers/unapproved/UnapprovedProviders";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -53,6 +54,9 @@ export default function Routes() {
             </Route>
             <Route path="/providerprofile" exact>
                <ProviderProfile />
+            </Route>
+            <Route path="/unapproved" exact>
+                <UnApprovedProviders />
             </Route>
          </Provider>
       </div>
