@@ -28,7 +28,7 @@ export default function LoginForm() {
         console.log(JSON.stringify(res.data.token));
         message.success("logged in successfully");
         localStorage.setItem("token", res.data.token);
-        sessionStorage.setItem("role", role);
+        localStorage.setItem("role", role);
         window.location.href = "/";
       })
       .catch((err) => {

@@ -4,14 +4,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart, defineProviderId } from "../../../routes/cartSlice";
 import menu_item from "../../../assets/imgs/menu_item.png";
 import { ServerIP } from "../../../assets/config";
+import discount from "../../../assets/imgs/big sale.png";
+import styles from "./ItemComponent.module.css";
+import { checkIfLoggedIn } from "../../../services/CheckUserStatus";
+import { checkRole } from "../../../services/CheckUserRole";
 // import { PlusOutlined } from "@ant-design/icons";
 // import { SearchOutlined } from "@ant-design/icons";
+
 export default function ItemComponent(props) {
   const dispatch = useDispatch();
   const [item, setItem] = useState();
+  const [isClientLoggedIn, setIsClientLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const [loginStatus, loginToken] = checkIfLoggedIn();
+    const role = checkRole();
+    if (loginStatus && role === "client") setIsClientLoggedIn(true);
+  }, []);
+
   useEffect(() => {
     setItem(props?.item);
   }, [props]);
+
   const saveDispatcherState = () => {
     const itemToBeSaved = {
       name: item.name,
@@ -44,11 +58,23 @@ export default function ItemComponent(props) {
           <p>{item?.name}</p>
           <p>{item?.summary}</p>
         </div>
-        <Tooltip title="Add to Cart">
-          <Button type="primary" onClick={() => saveDispatcherState()}>
-            Add to Cart
-          </Button>
-        </Tooltip>
+
+        <div>
+          <p>
+            {item?.old_price > item?.price && (
+              <img src={discount} className={styles.discount} alt="discount" />
+            )}
+            <span style={{ fontWeight: "bold" }}>price :</span> {item?.price}
+          </p>
+
+          {isClientLoggedIn && (
+            <Tooltip title="Add to Cart">
+              <Button type="primary" onClick={() => saveDispatcherState()}>
+                Add to Cart
+              </Button>
+            </Tooltip>
+          )}
+        </div>
       </div>
     </>
   );
