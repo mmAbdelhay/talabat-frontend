@@ -72,7 +72,7 @@ export default function ProviderSignUp() {
   };
 
   return (
-    <>
+    <dev>
       <Form name="basic" style={{ width: "70%" }}>
         <NameInput onNameInputChange={(value) => setName(value)} />
         <EmailInput onEmailInputChange={(value) => setEmail(value)} />
@@ -138,6 +138,6 @@ export default function ProviderSignUp() {
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </dev>
   );
 }

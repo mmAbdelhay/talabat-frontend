@@ -49,23 +49,23 @@ export default function Header() {
             </Nav>
             <Nav>
                {!loginStatus ? (
-                  <>
+                  <dev>
                      <Link to="/login" className="nav-item nav-link">
                         Login
                      </Link>
                      <Link to="/signup" className="nav-item nav-link">
                         Signup
                      </Link>
-                  </>
+                  </dev>
                ) : (
-                  <>
+                  <dev>
                      <Link to="/myprofile" className="nav-item nav-link">
                         account
                      </Link>
                      <Link className="nav-item nav-link float-right" onClick={logout}>
                         logout
                      </Link>
-                  </>
+                  </dev>
                )}
             </Nav>
          </Navbar.Collapse>
