@@ -23,7 +23,12 @@ export default function EmailInput(props) {
       ]}
       onChange={changeHandler}
     >
-      <Input prefix={<UserOutlined />} placeholder="Email" />
-    </Form.Item>
+    {props.value ? 
+      <Input prefix={<UserOutlined />}defaultValue={`${props.value}`} />
+
+      :
+      
+      <Input prefix={<UserOutlined />}placeholder="Email" />
+      }    </Form.Item>
   );
 }

@@ -38,7 +38,7 @@ export default function LoginForm() {
   };
 
   return (
-    <>
+    <dev>
       <Title level={5}>Login page</Title>
       <Form
         name="basic"
@@ -123,6 +123,6 @@ export default function LoginForm() {
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </dev>
   );
 }

@@ -17,6 +17,7 @@ const { TabPane } = Tabs;
 export default function ProviderProfile(props) {
   const [providerInformation, setProviderInformation] = useState({});
 
+
   useEffect(async () => {
     const returnedInformation = await getProviderInfo(
       "b3b57ae8-7c05-4245-9770-40d61c9eff5e"

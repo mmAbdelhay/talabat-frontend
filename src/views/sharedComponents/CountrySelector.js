@@ -12,11 +12,21 @@ function CountrySelector(props) {
 
   return (
     <Form.Item label="Select your Country">
+      {props.value?
       <Select
+      options={options}
+      onChange={changeHandler}
+      defaultValue={`${props.value}`}
+
+    />
+      :
+        <Select
         options={options}
         placeholder="select your country"
         onChange={changeHandler}
       />
+      }
+      
     </Form.Item>
   );
 }
