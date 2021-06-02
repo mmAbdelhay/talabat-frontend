@@ -57,6 +57,7 @@ export default function ProviderProfile() {
                <Cart />
             </div>
          </div>
+         <br /><br />
       </div>
    );
 }
