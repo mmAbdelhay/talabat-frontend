@@ -10,8 +10,8 @@ class UnApprovedProviders extends React.Component{
       super(props);
       this.state={
           unApproved:[],
-        //   token:localStorage.getItem("token"),
-          token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5OTNhZjNhNy01ZmE4LTQ4ZDgtOWFlNS1lZTJhOWU3ZjUyOWQiLCJfcm9sZSI6IlN1cGVyIFVzZXIiLCJpYXQiOjE2MjI1OTk3OTUsImV4cCI6MTYyMjY0Mjk5NX0.AIXHYiGSZvUtoDIm4BsskW4TaUigShcw_2gn4sHnxKc'
+          token:localStorage.getItem("token"),
+          // token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5OTNhZjNhNy01ZmE4LTQ4ZDgtOWFlNS1lZTJhOWU3ZjUyOWQiLCJfcm9sZSI6IlN1cGVyIFVzZXIiLCJpYXQiOjE2MjI2NTY5MTEsImV4cCI6MTYyMjcwMDExMX0.XBCWZjsYpJR5eVDHY3G7DCsHQsDPlhhLabHEPS_Tfjw'
       };
   }
 
