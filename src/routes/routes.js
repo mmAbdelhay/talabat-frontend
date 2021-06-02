@@ -13,6 +13,7 @@ import Terms from "../views/terms/Terms";
 import ProviderProfile from "../views/providers/providerprofile/providerprofile";
 
 import ClinetProfile from "../views/profiles/ClientProfile";
+import UnApprovedProviders from "../views/providers/unapproved/UnapprovedProviders";
 
 export default function Routes() {
    const [status] = checkIfLoggedIn();
@@ -50,6 +51,9 @@ export default function Routes() {
          </Route>
          <Route path="/providerprofile" exact>
             <ProviderProfile />
+         </Route>
+         <Route path="/unapproved" exact>
+            <UnApprovedProviders />
          </Route>
       </div>
    );
