@@ -29,6 +29,9 @@ export default function MapModal (props) {
        backLat = mlat ;
        backLng = mlng;
     }
+    sessionStorage.setItem('nearlat', JSON.stringify(backLat));
+    sessionStorage.setItem('nearlng', JSON.stringify(backLng));
+    window.location.href = '/nearestProvides';
     console.log(backLat);
     console.log(backLng);
   };
