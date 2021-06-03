@@ -55,14 +55,15 @@ export default function Routes() {
          <Route path="/myprofile" exact>
             <ClinetProfile />
          </Route>
+         <Provider store={store}>
          <Route path="/providerprofile" exact>
             <ProviderProfile />
          </Route>
-         <Provider store={store}>
+         </Provider>
             <Route path="/unapproved" exact>
                 <UnApprovedProviders />
             </Route>
-         </Provider>
+        
       </div>
    );
 }
