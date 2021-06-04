@@ -71,9 +71,11 @@ class AllResturants extends React.Component{
        return (
         <div className="container border pt-2 shadow p-3 mb-5 bg-white rounded">
           <h3 className="bg-light pb-1 pt-1 mb-5">All Restaurants</h3>
-          <div className="input-group mb-3" style={{width:"30%"}}>
+          {this.state.restaurants.length?<div className="input-group mb-3" style={{width:"30%"}}>
             <input type="text" className="form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={this.handleSearchChange} value={this.state.searchstring}></input>
-          </div>
+          </div>:""}
+          {curentPosts.length?
+          <div>
         <div className="row">
         {curentPosts.map((item) => {
                   return (
@@ -81,7 +83,7 @@ class AllResturants extends React.Component{
                   );
               })}
         </div>
-        <nav aria-label="Page navigation example">
+        {pagesCount>1?<nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item" onClick={(e)=>this.handlePaginationPrevClick(e)}><a class="page-link">Previous</a></li>
             {[
@@ -91,7 +93,7 @@ class AllResturants extends React.Component{
             ))}
             <li class="page-item"><a class="page-link" onClick={(e)=>this.handlePaginationNextClick(e)}>Next</a></li>
           </ul>
-        </nav>
+        </nav>:""}</div>:<h1>No Restaurants Available</h1>}
         </div>
        );
   }
