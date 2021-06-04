@@ -43,6 +43,26 @@ class AllResturants extends React.Component{
     
   }
 
+  handlePaginationNextClick(e) {
+    e.preventDefault();
+    let pagesCount = Math.ceil(this.state.searchedRests.length / this.state.postsPerPage);
+    let nextPage=this.state.currentPage<pagesCount?(this.state.currentPage+1):this.state.currentPage;
+    this.setState({
+      currentPage: nextPage
+    });
+    
+  }
+
+  handlePaginationPrevClick(e) {
+    e.preventDefault();
+    let pagesCount = Math.ceil(this.state.searchedRests.length / this.state.postsPerPage);
+    let prevPage=this.state.currentPage>1?(this.state.currentPage-1):this.state.currentPage;
+    this.setState({
+      currentPage: prevPage
+    });
+    
+  }
+
   render(){
     let pagesCount = Math.ceil(this.state.searchedRests.length / this.state.postsPerPage);
     let indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
@@ -63,16 +83,13 @@ class AllResturants extends React.Component{
         </div>
         <nav aria-label="Page navigation example">
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item" onClick={(e)=>this.handlePaginationPrevClick(e)}><a class="page-link">Previous</a></li>
             {[
               ...Array(pagesCount),
             ].map((value, index) => (
-              <li class="page-item" onClick={(e)=>this.handlePaginationClick(e)}><a class="page-link" href="#">{index+1}</a></li>
+              <li class="page-item" onClick={(e)=>this.handlePaginationClick(e)}><a class="page-link" >{index+1}</a></li>
             ))}
-            {/* <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li> */}
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link" onClick={(e)=>this.handlePaginationNextClick(e)}>Next</a></li>
           </ul>
         </nav>
         </div>
