@@ -1,10 +1,10 @@
-import {loadStripe} from '@stripe/stripe-js';
 import { CardElement,
-  Elements,
   useElements,
   useStripe} from '@stripe/react-stripe-js';
-  import { Card, Button,Modal,Result } from "antd";
-  import React, { useState, useEffect } from "react";
+  import {  Button,Result } from "antd";
+  import axios from "axios";
+  import { ServerIP } from "../../../assets/config";
+  import React, { useState} from "react";
   import "./styles.css";
 const CARD_OPTIONS = {
     iconStyle: "solid",
@@ -115,6 +115,9 @@ export default function CheckoutForm  (props) {
     const [cardComplete, setCardComplete] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState(null);
+    const [cartElements, setCartElements] = useState(sessionStorage.getItem('cart'));
+    const [ProvID, setProvID] = useState(sessionStorage.getItem('providerId'));
+    const [total, setTotalPrice] = useState(sessionStorage.getItem('totalprice'));
     const [billingDetails, setBillingDetails] = useState({
       email: "",
       phone: "",
@@ -123,7 +126,7 @@ export default function CheckoutForm  (props) {
   
     const handleSubmit = async (event) => {
       event.preventDefault();
-  
+      
       if (!stripe || !elements) {
         // Stripe.js has not loaded yet. Make sure to disable
         // form submission until Stripe.js has loaded.
@@ -158,7 +161,39 @@ export default function CheckoutForm  (props) {
         window.location.href = '/';
       
     };
+    const  OrderCreation= () =>{
+      axios
+      .post(`${ServerIP}/API/V1/orders/CreateOrder/create`,{
+        
+        cart : cartElements,
+        provider_id : ProvID,
+        total_price: total,
+        lat: 1.0,
+        lng: 1.0
+      },
+      {headers: {
+        Authorization: 'Token ' + localStorage.getItem("token")
+      }
+    },)
+      .then((res) => {
+        console.log(res.data);
+        sessionStorage.removeItem('cart');
+      })
+      .catch((err) => {
+        alert("something went wrong 😑 ");
+        
+        console.log(err.response.status);
+      });
+  };
+    
+    if(paymentMethod){
+      OrderCreation();
+    }
     return paymentMethod ? (
+    
+    
+    
+    
     <Result
     status="success"
     title="Successfully Purchased "
