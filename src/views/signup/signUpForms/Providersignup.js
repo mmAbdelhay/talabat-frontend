@@ -28,21 +28,7 @@ export default function ProviderSignUp() {
   const [delivery_fee, setDelivery_fee] = useState("");
 
   const signUp = () => {
-    // const formData = new FormData();
-    // formData.append("email", email);
-    // formData.append("name", name);
-    // formData.append("latitude", latitude);
-    // formData.append("longitude", longitude);
-    // formData.append("provider_type", provider_type);
-    // formData.append("coverage_zone", coverage_zone);
-    // formData.append("opening_hour", opening_hour);
-    // formData.append("closing_hour", closing_hour);
-    // formData.append("delivery_fee", delivery_fee);
-    // formData.append("logo", logo);
-    // formData.append("minimum_order", minimum_order);
-    // formData.append("country", country);
-    // formData.append("delivery_time", delivery_time);
-
+   
     const payload = {
       email: email,
       password: password,
