@@ -18,6 +18,7 @@ import UnApprovedProviders from "../views/providers/unapproved/UnapprovedProvide
 
 import { Provider } from "react-redux";
 import store from "./store";
+import OrderStatus from "../views/orderStatus/orderStatus";
 export default function Routes() {
    const [status] = checkIfLoggedIn();
    return (
@@ -60,9 +61,12 @@ export default function Routes() {
             <ProviderProfile />
          </Route>
          </Provider>
-            <Route path="/unapproved" exact>
-                <UnApprovedProviders />
-            </Route>
+         <Route path="/unapproved" exact>
+             <UnApprovedProviders />
+         </Route>
+         <Route path="/orderstatus" exact>
+                <OrderStatus />
+         </Route>
         
       </div>
    );
