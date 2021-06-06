@@ -19,6 +19,7 @@ import PendingOrders from "../views/providers/unapproved/pendingOrders";
 
 import { Provider } from "react-redux";
 import store from "./store";
+import OrderStatus from "../views/orderStatus/orderStatus";
 export default function Routes() {
    const [status] = checkIfLoggedIn();
    return (
@@ -66,6 +67,10 @@ export default function Routes() {
          </Route>
          <Route path="/orderstate" exact>
             <PendingOrders />
+             <UnApprovedProviders />
+         </Route>
+         <Route path="/orderstatus" exact>
+                <OrderStatus />
          </Route>
         
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import { ServerIP } from "../../../assets/config";
 import "antd/dist/antd.css";
 import Item from 'antd/lib/list/Item';
 import { Button ,h1} from 'antd';
@@ -23,7 +24,7 @@ class AllNearestProviders extends React.Component{
   }
 
   async componentDidMount() {
-    const response = await axios.post("http://localhost:5000/api/v1/guest/lookup/nearproviders", {latitude: this.state.resLat,
+    const response = await axios.post(`${ServerIP}/api/v1/guest/lookup/nearproviders`, {latitude: this.state.resLat,
     longitude: this.state.resLng});
     this.setState({restaurants:response.data.Message,searchedRests:response.data.Message})
   }

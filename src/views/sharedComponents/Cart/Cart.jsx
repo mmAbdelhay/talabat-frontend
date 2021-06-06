@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "antd";
+import { Card, Button,Modal } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../../../routes/cartSlice";
 import { MinusOutlined, RightOutlined } from "@ant-design/icons";
 import { checkIfLoggedIn } from "../../../services/CheckUserStatus";
 import { checkRole } from "../../../services/CheckUserRole";
-
+import {loadStripe} from '@stripe/stripe-js';
+import { CardElement,
+  Elements,
+  useElements,
+  useStripe} from '@stripe/react-stripe-js';
+import CheckoutForm from './stripe';
+import ELEMENTS_OPTIONS from './stripe';
 export default function Cart() {
   const [isClientLoggedIn, setIsClientLoggedIn] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
+  const [popup, setPopState] = useState(false);
   const [totalprice, setTotalprice] = useState(0);
+
 
   useEffect(() => {
     const [loginStatus, loginToken] = checkIfLoggedIn();
     const role = checkRole();
     if (loginStatus && role === "client") setIsClientLoggedIn(true);
+    
   }, []);
 
   useEffect(() => {
@@ -25,10 +34,19 @@ export default function Cart() {
     });
     setTotalprice(total);
   }, [cartItems]);
-
-  const handleCheckOut = () => {
+  const stripePromise = loadStripe('pk_test_51IylsfFbv4bq3gHEGu377QH9EZEm3dJzg1KEtB1wxb1ifEECvujcbHtxMOvc74fO9lNAAIFOCqF1ySZXEfmAc09J00UtkrLyEI');
+  const handleVisa = () => {
+    console.log("ddddddddddddddddddddddddd");
     sessionStorage.setItem("totalprice", totalprice);
+    setPopState(true);
+    
     // you can here render to check out component you have array of items and totalprice in sessiosStorage
+  };
+  const handleCash = () => {
+    console.log("aaaaaaaaaaa");
+  }
+  const handleCancel = () => {
+    setPopState(false);
   };
 
   if (isClientLoggedIn) {
@@ -83,16 +101,32 @@ export default function Cart() {
         })}
         {totalprice > 0 && (
           <>
+             <Modal title="Fill your data" visible={popup} footer={[null]} onCancel={handleCancel}>
+             <div className="AppWrapper mt-5 ">
+      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+        <CheckoutForm />
+      </Elements>
+    </div>
+        </Modal>
             <p style={{ fontWeight: "bold" }}>Total price : {totalprice}</p>
+            <p>Pay with</p>
             <Button
               style={{
                 backgroundColor: "#52bf55",
                 color: "#fff",
                 float: "right",
               }}
-              onClick={handleCheckOut}
+              onClick={handleVisa}
             >
-              checkout
+              Visa 
+            </Button>
+            <Button style={{
+                backgroundColor: "#52bf55",
+                color: "#fff",
+                float: "left",
+              }}
+              onClick={handleCash}>
+              Cash
             </Button>
           </>
         )}

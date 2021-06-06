@@ -1,16 +1,11 @@
 import React from 'react';
 import axios from "axios";
 import RestaurantComponent from './restaurantComponent'
-import {  Row, Col  } from 'antd'
-import "antd/dist/antd.css";
-import Item from 'antd/lib/list/Item';
-// const {  Row, Col  } = antd;
 
 class AllResturants extends React.Component{
 
   constructor(props){
       super(props);
-      // this.pageSize = 3;
       this.state={
         restaurants:[],
         searchedRests:[],
@@ -34,9 +29,7 @@ class AllResturants extends React.Component{
   }
 
   handlePaginationClick(e) {
-    // console.log(typeof parseInt(e.target.innerHTML));
     e.preventDefault();
-
     this.setState({
       currentPage: parseInt(e.target.innerHTML)
     });
@@ -55,7 +48,6 @@ class AllResturants extends React.Component{
 
   handlePaginationPrevClick(e) {
     e.preventDefault();
-    let pagesCount = Math.ceil(this.state.searchedRests.length / this.state.postsPerPage);
     let prevPage=this.state.currentPage>1?(this.state.currentPage-1):this.state.currentPage;
     this.setState({
       currentPage: prevPage
@@ -70,7 +62,7 @@ class AllResturants extends React.Component{
     let curentPosts = this.state.searchedRests.slice(indexOfFirstPost, indexOfLastPost);
        return (
         <div className="container border pt-2 shadow p-3 mb-5 bg-white rounded">
-          <h3 className="bg-light pb-1 pt-1 mb-5">All Restaurants</h3>
+          <h3 className="pb-1 pt-1 mb-5" style={{backgroundColor:"#F5F5F5"}}>All Restaurants</h3>
           {this.state.restaurants.length?<div className="input-group mb-3" style={{width:"30%"}}>
             <input type="text" className="form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={this.handleSearchChange} value={this.state.searchstring}></input>
           </div>:""}
