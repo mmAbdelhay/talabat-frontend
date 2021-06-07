@@ -3,6 +3,7 @@ import axios from "axios";
 import "antd/dist/antd.css";
 import { Table, Tag, Space } from 'antd';
 import {  Button  } from 'antd';
+import { ServerIP } from "../../../assets/config";
 
 class UnApprovedProviders extends React.Component{
 
@@ -20,7 +21,7 @@ class UnApprovedProviders extends React.Component{
   }
 
   getUnapproved=async ()=>{
-    const response = await axios.get("http://localhost:5000/api/v1/superuser/unapproved/providers", {
+    const response = await axios.get(`${ ServerIP }/api/v1/superuser/unapproved/providers`, {
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
