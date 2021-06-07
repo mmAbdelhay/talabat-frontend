@@ -5,6 +5,7 @@ import axios from "axios";
 import { LoadingOutlined } from '@ant-design/icons';
 import {  Button  } from 'antd';
 const { Step } = Steps;
+import { ServerIP } from "../../assets/config";
 
 
 
@@ -25,7 +26,7 @@ class OrderStatus extends React.Component{
 
   getStatus=async ()=>{
     let states=["Pending", "Preparing", "Ready", "Delivering", "Delivered", "Canceled"]
-    const response = await axios.get("http://localhost:5000/api/v1/client/order/status/5", {
+    const response = await axios.get(`${ServerIP}/api/v1/client/order/status/5`, {
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
@@ -48,7 +49,7 @@ class OrderStatus extends React.Component{
         <Button type="primary" onClick={this.refresh}>Refresh</Button>
         <div>
             <div style={{width:"fit-content",margin:"auto",height:"400px"}}>
-                <img src={`http://localhost:5000/orderstatus/images/${this.state.currentGif}.gif`} alt="loading..." style={{width:"400px"}} className="mx-auto"/>
+                <img src={`${ServerIP}/orderstatus/images/${this.state.currentGif}.gif`} alt="loading..." style={{width:"400px"}} className="mx-auto"/>
             </div>
         </div>
         <Steps current={this.state.currentState} style={{marginTop:"50px"}}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import RestaurantComponent from './restaurantComponent'
+import { ServerIP } from "../../assets/config";
 
 class AllResturants extends React.Component{
 
@@ -17,7 +18,7 @@ class AllResturants extends React.Component{
   }
 
   async componentDidMount() {
-    const response = await axios.get("http://localhost:5000/api/v1/guest/restaurants/all", {});
+    const response = await axios.get(`${ServerIP}/api/v1/guest/restaurants/all`, {});
     this.setState({restaurants:response.data.All_Restaurants,searchedRests:response.data.All_Restaurants})
   }
 
