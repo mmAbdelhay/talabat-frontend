@@ -31,7 +31,7 @@ class UnApprovedProviders extends React.Component{
     }
 
   approve=(e,record)=>{
-      axios.put(`http://localhost:5000/api/v1/superuser/unapproved/providers/approve/${record.id}`,{},{
+      axios.put(`${ ServerIP }/api/v1/superuser/unapproved/providers/approve/${record.id}`,{},{
             headers: {
                 'Authorization': `Token ${this.state.token}`
             }
@@ -44,7 +44,7 @@ class UnApprovedProviders extends React.Component{
   }
 
   decline=(e,record)=>{
-    axios.delete(`http://localhost:5000/api/v1/superuser/delete/provider/${record.id}`,{
+    axios.delete(`${ ServerIP }/api/v1/superuser/delete/provider/${record.id}`,{
           headers: {
               'Authorization': `Token ${this.state.token}`
           }
