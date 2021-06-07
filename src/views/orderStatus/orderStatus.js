@@ -4,8 +4,8 @@ import {  Steps  } from 'antd';
 import axios from "axios";
 import { LoadingOutlined } from '@ant-design/icons';
 import {  Button  } from 'antd';
-const { Step } = Steps;
 import { ServerIP } from "../../assets/config";
+const { Step } = Steps;
 
 
 
@@ -49,7 +49,7 @@ class OrderStatus extends React.Component{
         <Button type="primary" onClick={this.refresh}>Refresh</Button>
         <div>
             <div style={{width:"fit-content",margin:"auto",height:"400px"}}>
-                <img src={`${ServerIP}/orderstatus/images/${this.state.currentGif}.gif`} alt="loading..." style={{width:"400px"}} className="mx-auto"/>
+                {this.state.currentGif?<img src={`${ServerIP}/orderstatus/images/${this.state.currentGif}.gif`} alt="loading..." style={{width:"400px"}} className="mx-auto"/>:"LOADING..."}
             </div>
         </div>
         <Steps current={this.state.currentState} style={{marginTop:"50px"}}>

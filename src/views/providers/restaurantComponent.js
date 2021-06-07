@@ -1,7 +1,8 @@
 import React from 'react';
 import {  Row, Col, Card  } from 'antd'
-const { Meta } = Card;
 import { ServerIP } from "../../assets/config";
+const { Meta } = Card;
+
 
 class RestaurantComponent extends React.Component{
 
