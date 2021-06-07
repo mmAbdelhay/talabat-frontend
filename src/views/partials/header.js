@@ -44,8 +44,8 @@ export default function Header() {
             FAQ
           </Link>
 
-          <Nav.Link href="/contactus">Contact us</Nav.Link>
-          <Nav.Link href="/allRestaurants">all Restaurants</Nav.Link>
+          <Nav.Link to="/contactus">Contact us</Nav.Link>
+          <Nav.Link to="/allRestaurants">all Restaurants</Nav.Link>
         </Nav>
         <Nav>
           {!loginStatus ? (
@@ -62,7 +62,7 @@ export default function Header() {
               <Link to="/myprofile" className="nav-item nav-link">
                 account
               </Link>
-              <Link className="nav-item nav-link float-right" onClick={logout}>
+              <Link to= "/logout" className="nav-item nav-link float-right" onClick={logout}>
                 logout
               </Link>
             </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import "antd/dist/antd.css";
-import {  Table, Tag, Space  } from 'antd';
+import { Table, Tag, Space } from 'antd';
 import {  Button  } from 'antd';
 
 class UnApprovedProviders extends React.Component{
