@@ -20,7 +20,7 @@ function App() {
     <div className="container">
       
       <PlacesAutocomplete />
-      <MapModal />
+      <MapModal operation={"nearprovider"}/>
       {isSuperUser && <GetAllMessages />}
     </div>
   );
