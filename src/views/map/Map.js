@@ -47,13 +47,6 @@ class Map extends Component {
    console.log(this.state);
  }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.state.markerPosition.lat !==  ) {
-  //     return true;
-  //   } else if (this.props.center.lat === nextProps.center.lat) {
-  //     return false;
-  //   }
-  // }
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });

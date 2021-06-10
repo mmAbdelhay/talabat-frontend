@@ -58,7 +58,6 @@ export default function Cart() {
                <p style={{ fontWeight: "bold" }}>Name</p>
                <p style={{ fontWeight: "bold" }}>Quantity</p>
                <p style={{ fontWeight: "bold" }}>Price</p>
-               <p style={{ fontWeight: "bold" }}>Additional</p>
             </div>
             {cartItems.length === 0 && (
                <div
@@ -81,7 +80,6 @@ export default function Cart() {
                         <p>{item?.name}</p>
                         <p>{item?.quantity}</p>
                         <p>{item?.price}</p>
-                        <p>{item?.additional}</p>
                         {item?.price > 0 && (
                            <Button
                               type="danger"

@@ -6,7 +6,7 @@ import usePlacesAutocomplete, {
   import React from "react";
 
   
-  const PlacesAutocomplete = () => {
+  const PlacesAutocomplete = (props) => {
     const {
       ready,
       value,
@@ -48,6 +48,8 @@ import usePlacesAutocomplete, {
             localStorage.setItem('searchlng', JSON.stringify(lng));
             console.log(parseFloat(localStorage.getItem("searchlat")));
             console.log(parseFloat(localStorage.getItem("searchlng")));
+            
+         
             // console.log(" Coordinates: ", { lat, lng });
           })
           .catch((error) => {
