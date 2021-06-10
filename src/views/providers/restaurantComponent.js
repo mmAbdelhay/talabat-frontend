@@ -17,7 +17,7 @@ class RestaurantComponent extends React.Component{
         <div className="col col-lg-2 col-md-3 col-sm-4 mb-3 " style={{cursor:"pointer"}}>
             <div className="card h-100 shadow shadow-primary" >
               <div className="container h-100  d-flex align-items-center">
-              <img src={`${ServerIP}${this.props.logo}`} className="card-img-top mt-3" alt="..."></img>
+              <img src={`${ServerIP}${this.props.logo}`} className="card-img-top" alt="..."></img>
               </div>
               <div className="card-body mb-4 border-top">
                 <h5 className="card-title" style={{textAlign:"center"}}>{this.props.name}</h5>

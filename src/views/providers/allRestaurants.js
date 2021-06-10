@@ -25,7 +25,7 @@ class AllResturants extends React.Component{
   handleSearchChange=(e)=>{
     this.setState({searchstring: e.target.value},()=>{
       let searchedRestaurants=this.state.restaurants.filter((rest)=>rest.name.startsWith(this.state.searchstring));
-      this.setState({searchedRests:searchedRestaurants});
+      this.setState({searchedRests:searchedRestaurants,currentPage:1},()=>{console.log(this.state.searchedRests);});
     });
   }
 
@@ -77,14 +77,14 @@ class AllResturants extends React.Component{
               })}
         </div>
         {pagesCount>1?<nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item" onClick={(e)=>this.handlePaginationPrevClick(e)}><a class="page-link">Previous</a></li>
+          <ul className="pagination">
+            <li className="page-item" onClick={(e)=>this.handlePaginationPrevClick(e)}><a className="page-link">Previous</a></li>
             {[
               ...Array(pagesCount),
             ].map((value, index) => (
-              <li class="page-item" onClick={(e)=>this.handlePaginationClick(e)}><a class="page-link" >{index+1}</a></li>
+              <li className="page-item" key={index} onClick={(e)=>this.handlePaginationClick(e)}><a className="page-link" >{index+1}</a></li>
             ))}
-            <li class="page-item"><a class="page-link" onClick={(e)=>this.handlePaginationNextClick(e)}>Next</a></li>
+            <li className="page-item"><a className="page-link" onClick={(e)=>this.handlePaginationNextClick(e)}>Next</a></li>
           </ul>
         </nav>:""}</div>:<h1>No Restaurants Available</h1>}
         </div>
