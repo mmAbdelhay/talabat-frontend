@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Tooltip } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, defineProviderId } from "../../../routes/cartSlice";
+
 import menu_item from "../../../assets/imgs/menu_item.png";
 import { ServerIP } from "../../../assets/config";
 import discount from "../../../assets/imgs/big sale.png";
@@ -24,6 +24,7 @@ export default function ItemComponent(props) {
 
    useEffect(() => {
       setItem(props?.item);
+      console.log("ID", props);
    }, [props]);
 
    const addDefaultSrc = (event) => {
@@ -57,7 +58,7 @@ export default function ItemComponent(props) {
 
                {isClientLoggedIn && (
                   <Tooltip title="Add to Cart">
-                     <AddToCartModal item={item} />
+                     <AddToCartModal item={item} providerId={props.providerId} />
                   </Tooltip>
                )}
             </div>
