@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button,Modal } from "antd";
+import { Card, Button,Modal , Input} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../../../routes/cartSlice";
 import { MinusOutlined, RightOutlined } from "@ant-design/icons";
 import { checkIfLoggedIn } from "../../../services/CheckUserStatus";
 import { checkRole } from "../../../services/CheckUserRole";
+import { ServerIP } from "../../../assets/config";
 import {loadStripe} from '@stripe/stripe-js';
+import axios from "axios";
 import { CardElement,
   Elements,
   useElements,
@@ -18,6 +20,9 @@ export default function Cart() {
   const dispatch = useDispatch();
   const [popup, setPopState] = useState(false);
   const [totalprice, setTotalprice] = useState(0);
+  const [cartElements, setCartElements] = useState(sessionStorage.getItem('cart'));
+  const [ProvID, setProvID] = useState(sessionStorage.getItem('providerId'));
+  const [total, setTotalPrice] = useState(sessionStorage.getItem('totalprice'));
 
 
   useEffect(() => {
@@ -43,10 +48,34 @@ export default function Cart() {
     // you can here render to check out component you have array of items and totalprice in sessiosStorage
   };
   const handleCash = () => {
-    console.log("aaaaaaaaaaa");
-  }
+    axios
+    .post(`${ServerIP}/API/V1/orders/CreateOrder/create`,{
+      
+      cart : cartElements,
+      provider_id : ProvID,
+      total_price: total,
+      lat: 1.0,
+      lng: 1.0
+    },
+    {headers: {
+      Authorization: 'Token ' + localStorage.getItem("token")
+    }
+  },)
+    .then((res) => {
+      console.log(res.data);
+      sessionStorage.removeItem('cart');
+    })
+    .catch((err) => {
+      alert("something went wrong 😑 ");
+      
+      console.log(err.response.status);
+    });
+  };
   const handleCancel = () => {
     setPopState(false);
+  };
+  const onChange = e => {
+    console.log(e);
   };
 
   if (isClientLoggedIn) {
@@ -98,9 +127,11 @@ export default function Cart() {
               </div>
             </>
           );
+
         })}
         {totalprice > 0 && (
           <>
+          <Input placeholder="Add your note" onChange={onChange}/>
              <Modal title="Fill your data" visible={popup} footer={[null]} onCancel={handleCancel}>
              <div className="AppWrapper mt-5 ">
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>

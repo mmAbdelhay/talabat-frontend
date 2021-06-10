@@ -33,6 +33,8 @@ export default function ClientProfile (){
         country: country,
         mobile: mobile,
         date_of_birth: dateOfBirth,
+        clientLAt:parseFloat(sessionStorage.getItem("nearlat")) ,
+        clientLng:parseFloat(sessionStorage.getItem("nearlng")) ,
       },{headers: {
         Authorization: 'Token ' + localStorage.getItem("token")
       }},)

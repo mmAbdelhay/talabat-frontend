@@ -17,23 +17,27 @@ export default function MapModal (props) {
   
 
   const handleOk = () => {
-    setIsModalVisible(false);
+    
     let backLat;
     let backLng
     if (mlat==null && mlng==null){
       backLat = parseFloat(localStorage.getItem("searchlat")) ;
       backLng = parseFloat(localStorage.getItem("searchlng")) ;
-
     }
     else {
        backLat = mlat ;
        backLng = mlng;
     }
+   
     sessionStorage.setItem('nearlat', JSON.stringify(backLat));
     sessionStorage.setItem('nearlng', JSON.stringify(backLng));
+    if(props.operation === "nearprovider"){
     window.location.href = '/nearestProvides';
-    console.log(backLat);
-    console.log(backLng);
+    }
+    
+    setIsModalVisible(false);
+    
+
   };
 
 
@@ -52,6 +56,7 @@ export default function MapModal (props) {
           ]}>
       <Map
 					google={props.google}
+          optype = {props.operation}
           nuLat = {parseFloat(localStorage.getItem("searchlat"))?parseFloat(localStorage.getItem("searchlat")):18.5204}
           nuLng = {parseFloat(localStorage.getItem("searchlng")) ?parseFloat(localStorage.getItem("searchlng")) :73.8567}
           onLatChange={(value) => setMlat(value)}
