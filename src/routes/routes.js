@@ -20,6 +20,8 @@ import PendingOrders from "../views/providers/unapproved/pendingOrders";
 import { Provider } from "react-redux";
 import store from "./store";
 import OrderStatus from "../views/orderStatus/orderStatus";
+import AddCategory from "../views/providers/providerMenu/addCategories";
+import AddItem from "../views/providers/providerMenu/addItem";
 export default function Routes() {
    const [status] = checkIfLoggedIn();
    return (
@@ -71,6 +73,12 @@ export default function Routes() {
          </Route>
          <Route path="/orderstatus" exact>
                 <OrderStatus />
+         </Route>
+         <Route path="/addcategory" exact>
+                <AddCategory />
+         </Route>
+         <Route path="/additem" exact>
+                <AddItem />
          </Route>
         
       </div>
