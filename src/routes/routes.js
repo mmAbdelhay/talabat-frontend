@@ -22,6 +22,8 @@ import store from "./store";
 import OrderStatus from "../views/orderStatus/orderStatus";
 import AddCategory from "../views/providers/providerMenu/addCategories";
 import AddItem from "../views/providers/providerMenu/addItem";
+import AddItemOption from "../views/providers/providerMenu/addItemOption";
+import AdditionalOption from "../views/providers/providerMenu/additionalOption";
 export default function Routes() {
    const [status] = checkIfLoggedIn();
    return (
@@ -79,6 +81,12 @@ export default function Routes() {
          </Route>
          <Route path="/additem" exact>
                 <AddItem />
+         </Route>
+         <Route path="/additemoption" exact>
+                <AddItemOption />
+         </Route>
+         <Route path="/additionaloption" exact>
+                <AdditionalOption />
          </Route>
         
       </div>
