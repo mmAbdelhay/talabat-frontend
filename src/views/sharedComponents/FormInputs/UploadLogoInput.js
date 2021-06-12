@@ -13,7 +13,7 @@ export default function UploadLogoInput(props) {
   };
   return (
     <div className="input-group">
-      <label>Logo: </label>
+      <label style={{paddingRight:"10px"}}>Logo:  </label>
       <FileBase64 multiple={false} onDone={handleChange} />
     </div>
   );
