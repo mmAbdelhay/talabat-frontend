@@ -11,6 +11,8 @@ import PasswordInput from "../sharedComponents/FormInputs/PasswordInput";
 import EmailInput from "../sharedComponents/FormInputs/EmailInput";
 import DateOfBirth from "../sharedComponents/FormInputs/DateOfBirth";
 import GenderInput from "../sharedComponents/FormInputs/GenderInput";
+import PlacesAutocomplete from "../map/PlacesAutocomplete";
+import MapModal from '../map/MapModal';
 
 export default function ClientProfile (){
   const [error, setError] = useState("");
@@ -22,7 +24,8 @@ export default function ClientProfile (){
   const [country, setCountry] = useState("");
   const [mobile, setMobile] = useState("");
   const Update = () => {
-    
+    setName()
+    console.log(name);
     axios
       .post(`${ServerIP}/api/v1/client/info/edit`,{
         
@@ -33,8 +36,8 @@ export default function ClientProfile (){
         country: country,
         mobile: mobile,
         date_of_birth: dateOfBirth,
-        // clientLAt:parseFloat(sessionStorage.getItem("nearlat")) ,
-        // clientLng:parseFloat(sessionStorage.getItem("nearlng")) ,
+        clientLAt:parseFloat(sessionStorage.getItem("nearlat")) ,
+        clientLng:parseFloat(sessionStorage.getItem("nearlng")) ,
       },{headers: {
         Authorization: 'Token ' + localStorage.getItem("token")
       }},)
@@ -62,7 +65,15 @@ export default function ClientProfile (){
             }
         })
         .then((res) => {
-          setUser(res.data)
+          setUser(res.data);
+          setName(User.client.name);
+          setEmail(User.client.email);
+          setGender(User.client.gender);
+          setDateOfBirth(User.client.DateOfBirth);
+          setPassword(User.client.password);
+          setCountry(User.client.country);
+          setMobile(User.client.mobile);
+
 
           console.log(res.data.client.name)
         })
@@ -128,6 +139,8 @@ export default function ClientProfile (){
         />
         <DateOfBirth onSelectDateOfBirth={(value) => setDateOfBirth(value) } value={`${User.client.date_of_birth}`} />
         <GenderInput onGenderChange={(value) => setGender(value)} value={`${User.client.gender}`} />
+        <PlacesAutocomplete />
+        <MapModal operation = {"register"}/>
       </Form>
       </Drawer>
      <Space align="center">

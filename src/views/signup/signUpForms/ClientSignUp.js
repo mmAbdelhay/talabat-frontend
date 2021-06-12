@@ -32,8 +32,8 @@ export default function ClientSignUp() {
         country: country,
         mobile: mobile,
         date_of_birth: dateOfBirth,
-        // clientLAt:parseFloat(sessionStorage.getItem("nearlat")) ,
-        // clientLng:parseFloat(sessionStorage.getItem("nearlng")) ,
+        clientLAt:parseFloat(sessionStorage.getItem("nearlat")) ,
+        clientLng:parseFloat(sessionStorage.getItem("nearlng")) ,
       })
       .then((res) => {
         console.log(res.data);
@@ -60,8 +60,9 @@ export default function ClientSignUp() {
         />
         <DateOfBirth onSelectDateOfBirth={(value) => setDateOfBirth(value)} />
         <GenderInput onGenderChange={(value) => setGender(value)} />
-        {/* <PlacesAutocomplete />
-        <MapModal operation = {"register"}/> */}
+        <PlacesAutocomplete />
+        <MapModal operation = {"register"}/>
+        <br></br>
         <Form.Item>
           <Button block type="primary" htmlType="submit" onClick={signUp}>
             SignUp

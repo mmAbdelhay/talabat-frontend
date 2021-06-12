@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Modal } from "antd";
+import { Card, Button, Modal , Input} from "antd";
+import axios from "axios";
+import { ServerIP } from "../../../assets/config";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../../../routes/cartSlice";
 import { MinusOutlined, RightOutlined } from "@ant-design/icons";
@@ -15,7 +17,9 @@ export default function Cart() {
    const dispatch = useDispatch();
    const [popup, setPopState] = useState(false);
    const [totalprice, setTotalprice] = useState(0);
-
+   const [cartElementss, setCartElements] = useState(sessionStorage.getItem('cart'));
+   const [ProvIDs, setProvID] = useState(sessionStorage.getItem('providerId'));
+   const [totals, setTotalPrice] = useState(sessionStorage.getItem('totalprice'));
    useEffect(() => {
       const [loginStatus, loginToken] = checkIfLoggedIn();
       const role = checkRole();
@@ -35,13 +39,47 @@ export default function Cart() {
    const handleVisa = () => {
       console.log("ddddddddddddddddddddddddd");
       sessionStorage.setItem("totalprice", totalprice);
+     
       setPopState(true);
 
       // you can here render to check out component you have array of items and totalprice in sessiosStorage
    };
+   const  OrderCreation= () =>{
+      axios
+      .post(`${ServerIP}/API/V1/orders/CreateOrder/create`,{
+        
+        cart : cartElementss,
+        provider_id : ProvIDs,
+        total_price: totals,
+        lat: sessionStorage.getItem('nearlat'),
+        lng: sessionStorage.getItem('nearlng'), 
+        paymentMethod: "cash",
+        notes: sessionStorage.getItem('notes')
+      },
+      {headers: {
+        Authorization: 'Token ' + localStorage.getItem("token")
+      }
+    },)
+      .then((res) => {
+        console.log(res.data);
+        sessionStorage.removeItem('cart');
+        window.location.href = '/';
+      })
+      .catch((err) => {
+        alert("something went wrong 😑 ");
+        
+        console.log(err.response.status);
+      });
+  };
    const handleCash = () => {
+      sessionStorage.setItem("totalprice", totalprice);
       console.log("aaaaaaaaaaa");
+      OrderCreation();
    };
+   const savenotes = (e) => {
+      
+      sessionStorage.setItem("notes",e.target.value);
+   }
    const handleCancel = () => {
       setPopState(false);
    };
@@ -105,6 +143,7 @@ export default function Cart() {
                         </Elements>
                      </div>
                   </Modal>
+                  <Input placeholder="add your note here"  onChange={savenotes}/>
                   <p style={{ fontWeight: "bold" }}>Total price : {totalprice}</p>
                   <p>Pay with</p>
                   <Button
