@@ -24,6 +24,7 @@ import AddCategory from "../views/providers/providerMenu/addCategories";
 import AddItem from "../views/providers/providerMenu/addItem";
 import AddItemOption from "../views/providers/providerMenu/addItemOption";
 import AdditionalOption from "../views/providers/providerMenu/additionalOption";
+import MenuEdit from "../views/providers/providerMenu/menu";
 export default function Routes() {
    const [status] = checkIfLoggedIn();
    return (
@@ -87,6 +88,9 @@ export default function Routes() {
          </Route>
          <Route path="/additionaloption" exact>
                 <AdditionalOption />
+         </Route>
+         <Route path="/menu/edit" exact>
+                <MenuEdit />
          </Route>
         
       </div>
