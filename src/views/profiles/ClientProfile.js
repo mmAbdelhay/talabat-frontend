@@ -101,7 +101,7 @@ export default function ClientProfile (){
      return  (
        User ?
       
-    <dev>
+    <div>
         <Drawer
         title="Basic Drawer"
         placement="right"
@@ -159,11 +159,11 @@ export default function ClientProfile (){
       <p>Country : {User.client.country}</p>
       <p>Date of birth : {User.client.date_of_birth}</p>
     </Card>
-    </dev> 
+    </div> 
     :
-    <dev>
+    <div>
      <h1>Loading</h1>
-    </dev>
+    </div>
     )
   }
   if (error){
