@@ -38,11 +38,11 @@ export default function LoginForm() {
   };
 
   return (
-    <dev>
+    <div>
       <Title level={5}>Login page</Title>
       <Form
         name="basic"
-        shouldUpdate
+        shouldupdate='true'
         form={form}
         initialValues={{
           remember: true,
@@ -123,6 +123,6 @@ export default function LoginForm() {
           </Button>
         </Form.Item>
       </Form>
-    </dev>
+    </div>
   );
 }

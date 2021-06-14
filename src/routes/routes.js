@@ -1,6 +1,10 @@
-import React from "react";
+import React,{ useState} from "react";
 import { Redirect, Route } from "react-router-dom";
+import { message } from "antd";
+
 import { checkIfLoggedIn } from "../services/CheckUserStatus";
+import { checkRole } from "../services/CheckUserRole";
+
 import App from "../App";
 import Signup from "../views/signup/SignUpTabs";
 import Login from "../views/login/loginForm/loginForm";
@@ -25,9 +29,17 @@ import AddItem from "../views/providers/providerMenu/addItem";
 import AddItemOption from "../views/providers/providerMenu/addItemOption";
 import AdditionalOption from "../views/providers/providerMenu/additionalOption";
 import MenuEdit from "../views/providers/providerMenu/menu";
+<<<<<<< HEAD
 import Orders from "../views/myorders/orders";
+=======
+import Coupon from "../views/coupons/coupon"
+import CouponPanel from "../views/coupons/couponPanel"
+
+
+>>>>>>> d0a8886cd32aacfcf5dd46f6bd78c63db9e39046
 export default function Routes() {
    const [status] = checkIfLoggedIn();
+   const role = checkRole();
    return (
       <div className="container">
          <Route path="/" exact>
@@ -94,9 +106,25 @@ export default function Routes() {
          <Route path="/menu/edit" exact>
                 <MenuEdit />
          </Route>
+<<<<<<< HEAD
          <Route path="/myorders" exact>
                 <Orders />
          </Route>
+=======
+         <Route path="/coupon/create" exact>
+            
+            {
+                role ==='superuser' ? <Coupon /> : <Redirect to="/login" />
+            }
+            
+            
+            
+         </Route>
+         <Route path="/coupon/panel" exact>
+                <CouponPanel />
+         </Route>
+
+>>>>>>> d0a8886cd32aacfcf5dd46f6bd78c63db9e39046
         
       </div>
    );

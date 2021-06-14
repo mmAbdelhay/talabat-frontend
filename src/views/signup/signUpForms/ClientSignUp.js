@@ -47,7 +47,7 @@ export default function ClientSignUp() {
   };
 
   return (
-    <dev>
+    <div>
       <Form name="basic" style={{ width: "70%" }}>
         <NameInput onNameInputChange={(value) => setName(value)} />
         <EmailInput onEmailInputChange={(value) => setEmail(value)} />
@@ -69,6 +69,6 @@ export default function ClientSignUp() {
           </Button>
         </Form.Item>
       </Form>
-    </dev>
+    </div>
   );
 }
