@@ -25,6 +25,7 @@ import AddItem from "../views/providers/providerMenu/addItem";
 import AddItemOption from "../views/providers/providerMenu/addItemOption";
 import AdditionalOption from "../views/providers/providerMenu/additionalOption";
 import MenuEdit from "../views/providers/providerMenu/menu";
+import Orders from "../views/myorders/orders";
 export default function Routes() {
    const [status] = checkIfLoggedIn();
    return (
@@ -74,9 +75,10 @@ export default function Routes() {
             <PendingOrders />
              <UnApprovedProviders />
          </Route>
-         <Route path="/orderstatus" exact>
+         {/* <Route path="/orderstatus" exact>
                 <OrderStatus />
-         </Route>
+         </Route> */}
+         <Route path="/orderstatus/:id" component={OrderStatus} />
          <Route path="/addcategory" exact>
                 <AddCategory />
          </Route>
@@ -91,6 +93,9 @@ export default function Routes() {
          </Route>
          <Route path="/menu/edit" exact>
                 <MenuEdit />
+         </Route>
+         <Route path="/myorders" exact>
+                <Orders />
          </Route>
         
       </div>

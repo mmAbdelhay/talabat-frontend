@@ -17,6 +17,7 @@ class OrderStatus extends React.Component{
         currentState:0,
         token:localStorage.getItem("token"),
         currentGif:"",
+        // orderID:this.props.match.params.id,
       };
   }
 
@@ -26,15 +27,15 @@ class OrderStatus extends React.Component{
 
   getStatus=async ()=>{
     let states=["Pending", "Preparing", "Ready", "Delivering", "Delivered", "Canceled"]
-    const response = await axios.get(`${ServerIP}/api/v1/client/order/status/5`, {
-        headers:{
-            Authorization: `Token ${this.state.token}`,
-        }
-    });
-    let current=states.indexOf(response.data.orderStatus.order_status)
+    // const response = await axios.get(`${ServerIP}/api/v1/client/order/status/${this.state.orderID}`, {
+    //     headers:{
+    //         Authorization: `Token ${this.state.token}`,
+    //     }
+    // });
+    let current=states.indexOf(this.props.match.params.id)
     console.log(current);
-    this.setState({currentState:current,currentGif:response.data.orderStatus.order_status})
-    console.log(response.data.orderStatus.order_status);
+    this.setState({currentState:current,currentGif:this.props.match.params.id})
+    console.log(this.props.match.params.id);
     }
 
     refresh=()=>{
