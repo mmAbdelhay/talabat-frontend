@@ -55,7 +55,7 @@ class Orders extends React.Component{
         dataSource={this.state.orders}
         
         renderItem={item => (
-          <Link to={`/orderStatus/${item.order_status}`} >
+          <Link to={item.order_status==`Delivered`?`/review/provider/${item.Provider.name}/${item.Provider.id}`:`/orderStatus/${item.id}`} >
           <List.Item
             key={item.id}
             
