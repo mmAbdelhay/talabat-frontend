@@ -279,9 +279,9 @@ export default function ClientProfile (){
     </Card>
     </dev> 
     :
-    <dev>
+    <div>
      <h1>Loading</h1>
-    </dev>
+    </div>
     )
   }
   if (error){

@@ -1,18 +1,24 @@
 import React from 'react';
 import "antd/dist/antd.css";
 import axios from "axios";
-import { ServerIP } from "../../../assets/config";
+import { ServerIP } from "../assets/config";
 import { Form, Input, Button, Checkbox } from 'antd';
 
 
 
-class AddCategory extends React.Component{
+class ReviewProvider extends React.Component{
 
   constructor(props){
       super(props);
       this.state={
         token:localStorage.getItem("token"),
+        providerName:this.props.match.params.prov_name,
+        providerID:this.props.match.params.prov_id
       };
+  }
+
+  async componentDidMount() {
+    console.log(this.props);
   }
 
   render(){
@@ -34,7 +40,7 @@ class AddCategory extends React.Component{
       const onFinish = (values) => {
         console.log('Success:', values);
         console.log(this.state.token);
-        axios.post(`${ServerIP}/api/v1/provider/categories/add`, 
+        axios.post(`${ServerIP}/api/v1/client/order/review/add/${this.state.providerID}`, 
             values,
             {headers: {
                 Authorization: `Token ${this.state.token}`,
@@ -55,7 +61,7 @@ class AddCategory extends React.Component{
   
   
             <div className="col-10 bg-success shadow-sm p-3 mb-5 bg-white ">
-                <h2>Add Category</h2><hr/>
+                <h2>Review {this.state.providerName}</h2><hr/>
       
 
                     <Form
@@ -64,18 +70,15 @@ class AddCategory extends React.Component{
                       onFinish={onFinish}
                       onFinishFailed={onFinishFailed}
                     >
-                      <Form.Item
-                        label="Category name"
-                        name="name"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input category name',
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
+                        <Form.Item name="content" label="Review" 
+                            rules={[
+                            {
+                                required: true,
+                                message: 'Please input content name',
+                            },
+                            ]}>
+                            <Input.TextArea />
+                        </Form.Item>
 
                       <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
@@ -95,4 +98,4 @@ class AddCategory extends React.Component{
   }
 }
 
-export default AddCategory;
+export default ReviewProvider;

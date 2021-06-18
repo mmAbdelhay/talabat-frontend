@@ -33,7 +33,7 @@ export default function ContactUsForm() {
   };
 
   return (
-    <dev>
+    <div>
       <Title level={4}>Contact us</Title>
       <Form>
         <NameInput onNameInputChange={(value) => setName(value)} />
@@ -52,6 +52,6 @@ export default function ContactUsForm() {
           </Button>
         </Form.Item>
       </Form>
-    </dev>
+    </div>
   );
 }
