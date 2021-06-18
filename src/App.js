@@ -18,20 +18,30 @@ function App() {
     if (loginStatus) setToken(loginToken);
     if (role === "superuser") setSuperUser(true);
   }, []);
-  return (
-    <div className="container">
-      <PlacesAutocomplete />
-      <MapModal operation={"nearprovider"} />
-      {isSuperUser && (
-        <div className="container">
-          <GetAllMessages />
-          <Link to="/allDrivers">
-            <Button type="primary">get all Drivers</Button>
-          </Link>
-        </div>
-      )}
-    </div>
-  );
+
+  if (isSuperUser) {
+    return (
+      <div className="container">
+        <Link to="/getAllMessages">
+          <Button type="primary" style={{ margin: "5px" }}>
+            get all Messages
+          </Button>
+        </Link>
+        <Link to="/allDrivers">
+          <Button type="primary" style={{ margin: "5px" }}>
+            get all Drivers
+          </Button>
+        </Link>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container">
+        <PlacesAutocomplete />
+        <MapModal operation={"nearprovider"} />
+      </div>
+    );
+  }
 }
 
 export default App;

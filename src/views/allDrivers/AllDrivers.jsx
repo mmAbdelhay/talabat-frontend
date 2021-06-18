@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import { ServerIP } from "../../assets/config";
+import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 const columns = [
   {
@@ -59,5 +61,14 @@ export default function AllDrivers() {
     console.log(drivers);
   }, []);
 
-  return <DataTable title="All Drivers" columns={columns} data={drivers} />;
+  return (
+    <div className="container">
+      <DataTable title="All Drivers" columns={columns} data={drivers} />
+      <Link to="/">
+        <Button type="primary" style={{ float: "right", margin: "10px" }}>
+          go back
+        </Button>
+      </Link>
+    </div>
+  );
 }
