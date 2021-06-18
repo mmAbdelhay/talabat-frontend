@@ -116,38 +116,58 @@ export default function Routes() {
         <PendingOrders />
         <UnApprovedProviders />
       </Route>
-      {/* <Route path="/orderstatus" exact>
-                <OrderStatus />
-         </Route> */}
-      <Route path="/orderstatus/:id" component={OrderStatus} />
-      <Route path="/addcategory" exact>
-        <AddCategory />
-      </Route>
-      <Route path="/additem" exact>
-        <AddItem />
-      </Route>
-      <Route path="/additemoption" exact>
-        <AddItemOption />
-      </Route>
-      <Route path="/additionaloption" exact>
-        <AdditionalOption />
-      </Route>
-      <Route path="/menu/edit" exact>
-        <MenuEdit />
-      </Route>
-      <Route path="/myorders" exact>
-        <Orders />
-      </Route>
-      <Route path="/coupon/create" exact>
-        {role === "superuser" ? <Coupon /> : <Redirect to="/login" />}
-      </Route>
-      <Route path="/coupon/panel" exact>
-        <CouponPanel />
-      </Route>
-      <Route
-        path="/review/provider/:prov_name/:prov_id"
-        component={ReviewProvider}
-      />
-    </div>
-  );
+      
+         <Route path="/orderstatus/:id" component={OrderStatus} />
+         <Route path="/addcategory" exact>
+                <AddCategory />
+         </Route>
+         <Route path="/additem" exact>
+                <AddItem />
+         </Route>
+         <Route path="/additemoption" exact>
+                <AddItemOption />
+         </Route>
+         <Route path="/additionaloption" exact>
+                <AdditionalOption />
+         </Route>
+
+         <Route path="/editcategory/:id" exact>
+                <EditCategory />
+         </Route>
+         <Route path="/edititem/:id" exact>
+                <EditItem />
+         </Route>
+         <Route path="/edititemoption/:id" exact>
+                <EditItemOption />
+         </Route>
+         <Route path="/editadditionaloption/:id" exact>
+                <EditadditionalOption />
+         </Route>
+
+         
+
+
+         <Route path="/menu/edit" exact>
+                <MenuEdit />
+         </Route>
+         <Route path="/myorders" exact>
+                <Orders />
+         </Route>
+         <Route path="/coupon/create" exact>
+            
+            {
+                role ==='superuser' ? <Coupon /> : <Redirect to="/login" />
+            }
+            
+            
+            
+         </Route>
+         <Route path="/coupon/panel" exact>
+                <CouponPanel />
+         </Route>
+         <Route path="/review/provider/:prov_name/:prov_id" component={ReviewProvider} />
+
+        
+      </div>
+   );
 }
