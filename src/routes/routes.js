@@ -25,9 +25,17 @@ import { Provider } from "react-redux";
 import store from "./store";
 import OrderStatus from "../views/orderStatus/orderStatus";
 import AddCategory from "../views/providers/providerMenu/addCategories";
+import EditCategory from "../views/providers/providerMenu/editCategories";
+
 import AddItem from "../views/providers/providerMenu/addItem";
+import EditItem from "../views/providers/providerMenu/editItem";
+
 import AddItemOption from "../views/providers/providerMenu/addItemOption";
+import EditItemOption from "../views/providers/providerMenu/editItemOption";
+
 import AdditionalOption from "../views/providers/providerMenu/additionalOption";
+import EditadditionalOption from "../views/providers/providerMenu/editadditionalOption";
+
 import MenuEdit from "../views/providers/providerMenu/menu";
 import Orders from "../views/myorders/orders";
 import Coupon from "../views/coupons/coupon"
@@ -101,6 +109,23 @@ export default function Routes() {
          <Route path="/additionaloption" exact>
                 <AdditionalOption />
          </Route>
+
+         <Route path="/editcategory/:id" exact>
+                <EditCategory />
+         </Route>
+         <Route path="/edititem/:id" exact>
+                <EditItem />
+         </Route>
+         <Route path="/edititemoption/:id" exact>
+                <EditItemOption />
+         </Route>
+         <Route path="/editadditionaloption/:id" exact>
+                <EditadditionalOption />
+         </Route>
+
+         
+
+
          <Route path="/menu/edit" exact>
                 <MenuEdit />
          </Route>
