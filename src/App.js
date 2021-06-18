@@ -21,7 +21,13 @@ function App() {
 
   if (isSuperUser) {
     return (
-      <div className="container">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Link to="/getAllMessages">
           <Button type="primary" style={{ margin: "5px" }}>
             get all Messages
@@ -30,6 +36,11 @@ function App() {
         <Link to="/allDrivers">
           <Button type="primary" style={{ margin: "5px" }}>
             get all Drivers
+          </Button>
+        </Link>
+        <Link to="/addDriver">
+          <Button type="primary" style={{ margin: "5px" }}>
+            Add Driver
           </Button>
         </Link>
       </div>

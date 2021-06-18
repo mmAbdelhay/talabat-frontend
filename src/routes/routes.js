@@ -35,6 +35,7 @@ import CouponPanel from "../views/coupons/couponPanel";
 import ReviewProvider from "../views/reviewProvider";
 import AllDrivers from "../views/allDrivers/AllDrivers";
 import GetAllMessages from "../views/contactUs/GetAllMessages";
+import AddDriver from "../views/addDriver/addDriver";
 
 export default function Routes() {
   const [status] = checkIfLoggedIn();
@@ -54,6 +55,13 @@ export default function Routes() {
       <Route path="/getAllMessages" exact>
         {status && role == "superuser" ? (
           <GetAllMessages />
+        ) : (
+          <Redirect to="/login" />
+        )}
+      </Route>
+      <Route path="/addDriver" exact>
+        {status && role == "superuser" ? (
+          <AddDriver />
         ) : (
           <Redirect to="/login" />
         )}
