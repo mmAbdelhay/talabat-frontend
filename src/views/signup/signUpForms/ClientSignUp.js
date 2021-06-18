@@ -32,8 +32,9 @@ export default function ClientSignUp() {
         country: country,
         mobile: mobile,
         date_of_birth: dateOfBirth,
-        clientLAt:parseFloat(sessionStorage.getItem("nearlat")) ,
-        clientLng:parseFloat(sessionStorage.getItem("nearlng")) ,
+        type:"Home",
+        clientLAt:10.1 ,
+        clientLng:10.1 ,
       })
       .then((res) => {
         console.log(res.data);

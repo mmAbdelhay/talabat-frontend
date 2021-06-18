@@ -1,3 +1,3 @@
 "use strict";
 
-module.exports.GoogleMapsAPI = "AIzaSyC7eBtH4Fhjwwd3YhHAWm2CG9ssMwl7URA";
+module.exports.GoogleMapsAPI = "AIzaSyCgQJ3IIzg8chw5IKSs7tmKVm3kQJb5kdM";

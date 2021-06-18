@@ -5,12 +5,25 @@ import { Button, message, Alert, Card } from "antd";
 import "antd/dist/antd.css";
 import { checkRole } from "../../services/CheckUserRole";
 import { checkIfLoggedIn } from "../../services/CheckUserStatus";
+import { Link } from "react-router-dom";
 
 export default function GetAllMessages() {
   const [token, setToken] = useState("");
   const [isSuperUser, setSuperUser] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [index, setIndex] = useState(false);
+
+  const getAllMessages = async (token) => {
+    let response = await axios.get(`${ServerIP}/api/v1/forms/contactus`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+    if (response.status === 200) {
+      setMessages(response.data?.Responses);
+    } else {
+      return false;
+    }
+  };
 
   useEffect(() => {
     const [loginStatus, loginToken] = checkIfLoggedIn();
@@ -19,44 +32,28 @@ export default function GetAllMessages() {
     if (role === "superuser") setSuperUser(true);
   }, []);
 
-  const getAllMessages = () => {
-    axios
-      .get(`${ServerIP}/api/v1/forms/contactus`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((res) => {
-        setIndex(false);
-        setMessages(res.data.Responses);
-      })
-      .catch((err) => {
-        message.error("something went wrong");
-      });
-  };
+  useEffect(() => {
+    getAllMessages(token);
+  }, [token]);
 
   return (
     <div>
-      <Button
-        type="primary"
-        onClick={getAllMessages}
-        style={{ marginBottom: 10 }}
-      >
-        get all messages
-      </Button>
-      {messages.length > 0
-        ? messages.map((value, index) => {
-            return (
-              <Card
-                size="small"
-                key={index}
-                title={`Message from ${value.name}`}
-              >
-                <p>{value.message}</p>
-              </Card>
-            );
-          })
-        : index && <Alert message="you dont have messages yet" type="info" />}
+      {messages.length > 0 ? (
+        messages.map((value, index) => {
+          return (
+            <Card size="small" key={index} title={`Message from ${value.name}`}>
+              <p>{value.message}</p>
+            </Card>
+          );
+        })
+      ) : (
+        <Alert message="you dont have messages yet" type="info" />
+      )}
+      <Link to="/">
+        <Button type="primary" style={{ float: "right", margin: "10px" }}>
+          go back
+        </Button>
+      </Link>
     </div>
   );
 }
