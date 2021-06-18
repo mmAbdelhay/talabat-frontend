@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import { checkIfLoggedIn } from "./services/CheckUserStatus";
 import { checkRole } from "./services/CheckUserRole";
 import GetAllMessages from "./views/contactUs/GetAllMessages";
-import MapModal from './views/map/MapModal';
+import MapModal from "./views/map/MapModal";
+import { Link } from "react-router-dom";
+import PlacesAutocomplete from "./views/map/PlacesAutocomplete";
+import { Button } from "antd";
 
-import PlacesAutocomplete from './views/map/PlacesAutocomplete';
 function App() {
   const [token, setToken] = useState("");
   const [isSuperUser, setSuperUser] = useState(false);
@@ -18,10 +20,16 @@ function App() {
   }, []);
   return (
     <div className="container">
-      
       <PlacesAutocomplete />
-      <MapModal operation={"nearprovider"}/>
-      {isSuperUser && <GetAllMessages />}
+      <MapModal operation={"nearprovider"} />
+      {isSuperUser && (
+        <div className="container">
+          <GetAllMessages />
+          <Link to="/allDrivers">
+            <Button type="primary">get all Drivers</Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
