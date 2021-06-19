@@ -32,20 +32,20 @@ export default function Header() {
             Feedback
           </Link>
           <Link className="nav-link text-white" to="/privacy">
-            {" "}
             Privacy
           </Link>
           <Link className="nav-link text-white" to="/terms">
-            {" "}
             Terms and Conditions
           </Link>
           <Link className="nav-link text-white" to="/faq">
-            {" "}
             FAQ
           </Link>
-
-          <Nav.Link to="/contactus">Contact us</Nav.Link>
-          <Nav.Link to="/allRestaurants">all Restaurants</Nav.Link>
+          <Link className="nav-link text-white" to="/contactus">
+            Contact us
+          </Link>
+          <Link className="nav-link text-white" to="/allRestaurants">
+            all Restaurants
+          </Link>
         </Nav>
         <Nav>
           {!loginStatus ? (
@@ -62,7 +62,11 @@ export default function Header() {
               <Link to="/myprofile" className="nav-item nav-link">
                 account
               </Link>
-              <Link to= "/logout" className="nav-item nav-link float-right" onClick={logout}>
+              <Link
+                to="/logout"
+                className="nav-item nav-link float-right"
+                onClick={logout}
+              >
                 logout
               </Link>
             </>
