@@ -38,11 +38,11 @@ export default function LoginForm() {
   };
 
   return (
-    <div>
+    <div style={{ height: 300 }}>
       <Title level={5}>Login page</Title>
       <Form
         name="basic"
-        shouldupdate='true'
+        shouldupdate="true"
         form={form}
         initialValues={{
           remember: true,
