@@ -25,9 +25,17 @@ import { Provider } from "react-redux";
 import store from "./store";
 import OrderStatus from "../views/orderStatus/orderStatus";
 import AddCategory from "../views/providers/providerMenu/addCategories";
+import EditCategory from "../views/providers/providerMenu/editCategories";
+
 import AddItem from "../views/providers/providerMenu/addItem";
+import EditItem from "../views/providers/providerMenu/editItem";
+
 import AddItemOption from "../views/providers/providerMenu/addItemOption";
+import EditItemOption from "../views/providers/providerMenu/editItemOption";
+
 import AdditionalOption from "../views/providers/providerMenu/additionalOption";
+import EditadditionalOption from "../views/providers/providerMenu/editadditionalOption";
+
 import MenuEdit from "../views/providers/providerMenu/menu";
 import Orders from "../views/myorders/orders";
 import Coupon from "../views/coupons/coupon";
@@ -108,38 +116,58 @@ export default function Routes() {
         <PendingOrders />
         <UnApprovedProviders />
       </Route>
-      {/* <Route path="/orderstatus" exact>
-                <OrderStatus />
-         </Route> */}
-      <Route path="/orderstatus/:id" component={OrderStatus} />
-      <Route path="/addcategory" exact>
-        <AddCategory />
-      </Route>
-      <Route path="/additem" exact>
-        <AddItem />
-      </Route>
-      <Route path="/additemoption" exact>
-        <AddItemOption />
-      </Route>
-      <Route path="/additionaloption" exact>
-        <AdditionalOption />
-      </Route>
-      <Route path="/menu/edit" exact>
-        <MenuEdit />
-      </Route>
-      <Route path="/myorders" exact>
-        <Orders />
-      </Route>
-      <Route path="/coupon/create" exact>
-        {role === "superuser" ? <Coupon /> : <Redirect to="/login" />}
-      </Route>
-      <Route path="/coupon/panel" exact>
-        <CouponPanel />
-      </Route>
-      <Route
-        path="/review/provider/:prov_name/:prov_id"
-        component={ReviewProvider}
-      />
-    </div>
-  );
+      
+         <Route path="/orderstatus/:id" component={OrderStatus} />
+         <Route path="/addcategory" exact>
+                <AddCategory />
+         </Route>
+         <Route path="/additem" exact>
+                <AddItem />
+         </Route>
+         <Route path="/additemoption" exact>
+                <AddItemOption />
+         </Route>
+         <Route path="/additionaloption" exact>
+                <AdditionalOption />
+         </Route>
+
+         <Route path="/editcategory/:id" exact>
+                <EditCategory />
+         </Route>
+         <Route path="/edititem/:id" exact>
+                <EditItem />
+         </Route>
+         <Route path="/edititemoption/:id" exact>
+                <EditItemOption />
+         </Route>
+         <Route path="/editadditionaloption/:id" exact>
+                <EditadditionalOption />
+         </Route>
+
+         
+
+
+         <Route path="/menu/edit" exact>
+                <MenuEdit />
+         </Route>
+         <Route path="/myorders" exact>
+                <Orders />
+         </Route>
+         <Route path="/coupon/create" exact>
+            
+            {
+                role ==='superuser' ? <Coupon /> : <Redirect to="/login" />
+            }
+            
+            
+            
+         </Route>
+         <Route path="/coupon/panel" exact>
+                <CouponPanel />
+         </Route>
+         <Route path="/review/provider/:prov_name/:prov_id" component={ReviewProvider} />
+
+        
+      </div>
+   );
 }

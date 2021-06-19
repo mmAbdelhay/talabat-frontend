@@ -1,9 +1,11 @@
 import React from 'react';
+import { withRouter  } from 'react-router-dom';
+
 import "antd/dist/antd.css";
 import axios from "axios";
 import { ServerIP } from "../../../assets/config";
 import { Collapse } from 'antd';
-import { Form, Select, Button  } from 'antd';
+import { Form, Select, Button,Space  } from 'antd';
 
 const { Panel } = Collapse;
 
@@ -11,6 +13,7 @@ class MenuEdit extends React.Component{
 
   constructor(props){
       super(props);
+      this.routeChange = this.routeChange.bind(this);
       this.state={
         token:localStorage.getItem("token"),
         categories:[],
@@ -35,6 +38,7 @@ class MenuEdit extends React.Component{
                 Authorization: `Token ${this.state.token}`,
             }
         });
+
         this.setState({
             categories:response.data,
         },()=>console.log(this.state.categories))
@@ -111,6 +115,72 @@ class MenuEdit extends React.Component{
             alert(error);
         });
   }
+
+  Edit =()=>{
+    console.log("category ID",this.state.categoryID);
+    console.log("item ID",this.state.itemID);
+    let axios_Link="";    
+    if(this.state.openCollapse==1){
+      axios_Link = `${ ServerIP }/api/v1/provider/categories/edit/${this.state.categoryID}`;
+    }else if(this.state.openCollapse==2){
+      axios_Link = `${ ServerIP }/api/v1/provider/items/edit/${this.state.itemID}`;
+    }else if(this.state.openCollapse==3){
+      axios_Link = `${ ServerIP }/api/v1/provider/itemoptions/edit/${this.state.itemOptionID}`;
+    }else if(this.state.openCollapse==4){
+      axios_Link = `${ ServerIP }/api/v1/provider/itemadditionaloptions/edit/${this.state.itemAdditionalOptionID}`;
+    }
+    console.log("axios link",axios_Link);
+    axios.put(`${ axios_Link }`,{
+      headers: {
+          'Authorization': `Token ${this.state.token}`
+      }
+      },{}).catch((error)=>{
+          alert(error);
+      });
+}
+
+
+
+
+routeChange(edittype) {
+    console.log(edittype);
+
+    let path = ''
+    switch(edittype) {
+        case 'category':
+            path = `/editcategory/${this.state.categoryID}`;
+            this.props.history.push(path);
+          break;
+        case 'item':
+             path = `/edititem/${this.state.itemID}`;
+            this.props.history.push(path);     
+          break;
+        
+        case 'itemoption':
+            path = `/edititemoption/${this.state.itemOptionID}`;
+            this.props.history.push(path);     
+          break;
+
+        case 'additionaloption':
+            
+            path = `/editadditionaloption/${this.state.itemAdditionalOptionID}`;
+            this.props.history.push(path);   
+          break;
+          
+          
+              
+          
+       
+      }
+    this.props.history.push(path);
+  }
+
+
+
+    
+
+
+
   callback=(key)=>{
     console.log(key);
     this.setState({
@@ -139,9 +209,17 @@ class MenuEdit extends React.Component{
                             </Select>
                             
                         </Form.Item>
-                        <Button type="primary" danger  onClick={this.Delete}>
-                                Delete
-                        </Button>
+                       
+                        <Space>
+                            <Button type="primary" danger  onClick={this.Delete}>
+                                    Delete
+                            </Button>
+                            <Button type="primary"   onClick={()=>this.routeChange('category')}>
+                                    Edit
+                            </Button>
+
+                           
+                        </Space>
                     </Form>
                 </Panel>
 
@@ -165,9 +243,16 @@ class MenuEdit extends React.Component{
                             })}
                             </Select>
                         </Form.Item>
-                        <Button type="primary" danger  onClick={this.Delete}>
-                                Delete
-                        </Button>
+                        <Space>
+                            <Button type="primary" danger  onClick={this.Delete}>
+                                    Delete
+                            </Button>
+                            <Button type="primary"   onClick={()=>this.routeChange('item')}>
+                                    Edit
+                            </Button>
+
+                           
+                        </Space>
                     </Form>
                 </Panel>
                 
@@ -201,9 +286,16 @@ class MenuEdit extends React.Component{
                             })}
                             </Select>
                         </Form.Item>
-                        <Button type="primary" danger  onClick={this.Delete}>
-                                Delete
-                        </Button>
+                        <Space>
+                            <Button type="primary" danger  onClick={this.Delete}>
+                                    Delete
+                            </Button>
+                            <Button type="primary"   onClick={()=>this.routeChange('itemoption')}>
+                                    Edit
+                            </Button>
+
+                           
+                        </Space>
                     </Form>
                 </Panel>
                 
@@ -246,9 +338,16 @@ class MenuEdit extends React.Component{
                             })}
                             </Select>
                         </Form.Item>
-                        <Button type="primary" danger  onClick={this.Delete}>
-                                Delete
-                        </Button>
+                        <Space>
+                            <Button type="primary" danger  onClick={this.Delete}>
+                                    Delete
+                            </Button>
+                            <Button type="primary"   onClick={()=>this.routeChange('additionaloption')}>
+                                    Edit
+                            </Button>
+
+                           
+                        </Space>
                     </Form>
                 </Panel>
 
@@ -262,4 +361,4 @@ class MenuEdit extends React.Component{
     }
 }
 
-export default MenuEdit;
+export default withRouter(MenuEdit);
