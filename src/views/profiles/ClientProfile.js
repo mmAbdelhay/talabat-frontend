@@ -40,8 +40,8 @@ export default function ClientProfile (){
 
   axios
       .post(`${ServerIP}/api/v1/client/info/addnewaddress`,{
-        'clientLAt':12.12333 ,
-        'clientLng':12.2065 ,
+        'clientLAt':121.12333 ,
+        'clientLng':121.2065 ,
         'type':type
       },{headers: {
         Authorization: 'Token ' + localStorage.getItem("token")
@@ -80,8 +80,8 @@ export default function ClientProfile (){
       'country': country?country:User.client.country,
       'mobile': mobile?mobile:User.client.mobile,
       'date_of_birth': dateOfBirth?dateOfBirth:User.client.DateOfBirth,
-      'clientLAt':10.1 ,
-      'clientLng':10.1 ,
+      'clientLAt':1112.1 ,
+      'clientLng':1121.1 ,
       'type':'Home'
     }
     console.log(user)
@@ -159,6 +159,7 @@ export default function ClientProfile (){
   
      useEffect  (()=>{
        getuserData()
+       if (User)
        setData (User.client.Client_Addresses.map(function(e) { 
         let obj = {
            address: Geocode.fromLatLng(e.client_latitude,e.client_longitude),

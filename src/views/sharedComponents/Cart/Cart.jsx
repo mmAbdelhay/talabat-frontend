@@ -36,6 +36,9 @@ export default function Cart() {
    const stripePromise = loadStripe(
       "pk_test_51IylsfFbv4bq3gHEGu377QH9EZEm3dJzg1KEtB1wxb1ifEECvujcbHtxMOvc74fO9lNAAIFOCqF1ySZXEfmAc09J00UtkrLyEI"
    );
+   const removeCoupon = ()=>{
+      sessionStorage.removeItem("discount");
+   }
    const handleVisa = () => {
       console.log("ddddddddddddddddddddddddd");
       sessionStorage.setItem("totalprice", totalprice);
@@ -44,6 +47,30 @@ export default function Cart() {
 
       // you can here render to check out component you have array of items and totalprice in sessiosStorage
    };
+   const checkCoupon = ()=>{
+      if (sessionStorage.getItem('coupon'))
+      axios
+      .post(`${ServerIP}/API/V1/orders/CreateOrder/checkCoupon`,{
+      
+        coupon: sessionStorage.getItem('coupon')
+      },)
+      .then((res) => {
+         console.log(res.data.checkCoupon.discount_percentage)
+         sessionStorage.setItem('discount',res.data.checkCoupon.discount_percentage)
+         setTotalprice(totalprice-sessionStorage.getItem('discount'))
+
+         // alert(totalprice);
+       
+      })
+      .catch((err) => {
+        alert("code not valid"+err);
+      
+      })
+     
+
+
+
+   }
    const  OrderCreation= () =>{
       axios
       .post(`${ServerIP}/API/V1/orders/CreateOrder/create`,{
@@ -51,10 +78,13 @@ export default function Cart() {
         cart : cartElementss,
         provider_id : ProvIDs,
         total_price: totals,
-        lat: sessionStorage.getItem('nearlat'),
-        lng: sessionStorage.getItem('nearlng'), 
+      //   lat: sessionStorage.getItem('nearlat'),
+      //   lng: sessionStorage.getItem('nearlng'), 
+        lat : 10,
+        lng : 10,
         paymentMethod: "cash",
-        notes: sessionStorage.getItem('notes')
+        notes: sessionStorage.getItem('notes'),
+        coupon: sessionStorage.getItem('coupon')?sessionStorage.getItem('coupon'):0
       },
       {headers: {
         Authorization: 'Token ' + localStorage.getItem("token")
@@ -73,12 +103,18 @@ export default function Cart() {
   };
    const handleCash = () => {
       sessionStorage.setItem("totalprice", totalprice);
-      console.log("aaaaaaaaaaa");
+      // console.log("aaaaaaaaaaa");
       OrderCreation();
    };
    const savenotes = (e) => {
-      
+   
       sessionStorage.setItem("notes",e.target.value);
+      
+   }
+   const saveCoupon = (e) => {
+      e.target.value?
+      sessionStorage.setItem("coupon",e.target.value):
+      sessionStorage.removeItem("coupon");
    }
    const handleCancel = () => {
       setPopState(false);
@@ -144,6 +180,7 @@ export default function Cart() {
                      </div>
                   </Modal>
                   <Input placeholder="add your note here"  onChange={savenotes}/>
+                  <Input placeholder="have a coupon ?"  onChange={saveCoupon}/> <Button onClick={checkCoupon}>check</Button><Button onClick={removeCoupon}>remove</Button>
                   <p style={{ fontWeight: "bold" }}>Total price : {totalprice}</p>
                   <p>Pay with</p>
                   <Button

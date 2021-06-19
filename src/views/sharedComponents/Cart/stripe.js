@@ -168,10 +168,12 @@ export default function CheckoutForm  (props) {
         cart : cartElements,
         provider_id : ProvID,
         total_price: total,
-        lat: sessionStorage.getItem('nearlat'),
-        lng: sessionStorage.getItem('nearlng'), 
+        lat: 20.0,
+        lng: 20.0, 
         paymentMethod: "visa",
-        notes: sessionStorage.getItem('notes')
+        notes: sessionStorage.getItem('notes'),
+        coupon: sessionStorage.getItem('coupon')?sessionStorage.getItem('coupon'):0
+        
       },
       {headers: {
         Authorization: 'Token ' + localStorage.getItem("token")
