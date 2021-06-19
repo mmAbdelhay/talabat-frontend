@@ -12,14 +12,14 @@ class AllNearestProviders extends React.Component{
       super(props);
       this.state={
         restaurants:[],
-        resLat : 31.106267,
-        resLng : 29.756120,
+        // resLat : 31.106267,
+        // resLng : 29.756120,
         searchedRests:[],
         searchstring:"",
         currentPage: 1,
         postsPerPage:4,
-        // resLat : sessionStorage.getItem('nearlat'),
-        // resLng: sessionStorage.getItem('nearlng') 
+        resLat : sessionStorage.getItem('nearlat'),
+        resLng: sessionStorage.getItem('nearlng') 
       };
   }
 

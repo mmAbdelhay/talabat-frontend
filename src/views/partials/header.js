@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav ,NavDropdown} from "react-bootstrap";
 import { checkIfLoggedIn } from "../../services/CheckUserStatus";
-
+import { checkRole } from "../../services/CheckUserRole";
 export default function Header() {
   const [loginStatus, setLoginStatus] = useState(false);
-
+  const [isSuperUser, setSuperUser] = useState(false);
+  const [isProvider, setProvider] = useState(false);
+  const [isClient, setClient] = useState(false);
   useEffect(() => {
     const [isLoggedIn] = checkIfLoggedIn();
+    const role = checkRole();
     if (isLoggedIn) setLoginStatus(true);
+    if (role === "superuser") setSuperUser(true);
+    if(role === "provider") setProvider(true);
+    if(role === "client") setClient(true);
   }, []);
 
   const logout = () => {
@@ -17,37 +23,42 @@ export default function Header() {
     window.location.href = "/login";
   };
   return (
-    <Navbar bg="primary" variant="dark" className="mb-4">
-      <Navbar.Brand href="/">Talabat</Navbar.Brand>
+    <Navbar bg="primary" variant="dark" className="mb-4" expand="lg">
+      <Navbar.Brand href="/">Talabatak</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Link className="nav-link text-white" to="/">
-            Home
-          </Link>
-          <Link className="nav-link text-white" to="/contactus">
-            Contact us
-          </Link>
-          <Link className="nav-link text-white" to="/feedback">
-            Feedback
-          </Link>
-          <Link className="nav-link text-white" to="/privacy">
-            Privacy
-          </Link>
-          <Link className="nav-link text-white" to="/terms">
-            Terms and Conditions
-          </Link>
-          <Link className="nav-link text-white" to="/faq">
-            FAQ
-          </Link>
-          <Link className="nav-link text-white" to="/contactus">
-            Contact us
-          </Link>
-          <Link className="nav-link text-white" to="/allRestaurants">
+          <Link className="nav-link text-white " to="/allRestaurants">
             all Restaurants
           </Link>
+        
+        
+        {isSuperUser ? (
+          <>
+            <Link to="/unapproved" className=" nav-link text-white">nonapproved providers</Link>
+            <Link to="/coupon/panel" className=" nav-link text-white">All Coupons</Link>
+            <Link to="/coupon/create" className=" nav-link text-white">Create Coupon</Link>
+          </>
+          ):("")}
+          {isClient ? (
+            <Link to="/myorders" className=" nav-link text-white">my orders</Link>
+          ):("")}
+          {isProvider ? (
+            <>
+            <Link to="/orderstate" className=" nav-link text-white">order state</Link>
+            <NavDropdown title="Create Menu"  className="text-white">
+              <NavDropdown.Item href="/addcategory">Add Category</NavDropdown.Item>
+              <NavDropdown.Item href="/additem">add item</NavDropdown.Item>
+              <NavDropdown.Item href="additemoption">item option</NavDropdown.Item>
+              <NavDropdown.Item href="/additionaloption">additional options</NavDropdown.Item>
+            </NavDropdown>
+            <Link to="/menu/edit" className=" nav-link text-white">Edit Menu</Link>
+            </>
+          ):("")
+          }
         </Nav>
         <Nav>
+          
           {!loginStatus ? (
             <>
               <Link to="/login" className="nav-item nav-link">

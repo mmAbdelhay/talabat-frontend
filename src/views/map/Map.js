@@ -16,17 +16,17 @@ class Map extends Component {
     super(props);
     this.state = {
       mapPosition: {
-        // lat: parseFloat(localStorage.getItem("searchlat")),
-        // lng: parseFloat(localStorage.getItem("searchlng")),
-        lat : props.nuLat ,
-        lng : props.nuLng
+        lat: parseFloat(localStorage.getItem("searchlat")),
+        lng: parseFloat(localStorage.getItem("searchlng")),
+        // lat : props.nuLat ,
+        // lng : props.nuLng
         
       },
       markerPosition: {
-        // lat: parseFloat(localStorage.getItem("searchlat")),
-        // lng: parseFloat(localStorage.getItem("searchlng")),
-        lat : props.nuLat ,
-        lng : props.nuLng
+        lat: parseFloat(localStorage.getItem("searchlat")),
+        lng: parseFloat(localStorage.getItem("searchlng")),
+        // lat : props.nuLat ,
+        // lng : props.nuLng
       },
     };
   }

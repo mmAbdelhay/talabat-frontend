@@ -47,7 +47,7 @@ function App() {
     );
   } else {
     return (
-      <div className="container">
+      <div className="container" style={{height:289,display:"flex",justifyContent:"center",alignItems:"center"}}>
         <PlacesAutocomplete />
         <MapModal operation={"nearprovider"} />
       </div>

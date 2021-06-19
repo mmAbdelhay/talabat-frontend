@@ -58,7 +58,6 @@ class Orders extends React.Component{
           <Link to={item.order_status==`Delivered`?`/review/provider/${item.Provider.name}/${item.Provider.id}`:`/orderStatus/${item.id}`} >
           <List.Item
             key={item.id}
-            
             extra={
               <img
                 width={272}
