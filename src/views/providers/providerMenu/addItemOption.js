@@ -5,6 +5,7 @@ import { ServerIP } from "../../../assets/config";
 import { Form, Input, Button, Checkbox, InputNumber,Select , message } from 'antd';
 import UploadLogoInput from "../../sharedComponents/FormInputs/UploadLogoInput";
 import { Redirect } from "react-router-dom";
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 class AddItemOption extends React.Component{
 
@@ -15,6 +16,8 @@ class AddItemOption extends React.Component{
         categories:[],
         items:[],
         submitted:false,
+        error:''
+
       };
   }
 
@@ -30,10 +33,27 @@ class AddItemOption extends React.Component{
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
-    });
-    this.setState({
-        categories:response.data,
-    },()=>console.log(this.state.categories))
+    }).then((res) => {
+     
+
+        console.log('in then',res)
+        this.setState({
+            categories:res.data,
+        },()=>console.log(this.state.categories))
+    
+    
+      }).catch((err) => {
+        console.log('this is error ',err)
+        if (err.response)
+          this.setState({error: err.response.status})
+        else 
+        this.setState({error: 500}) 
+        
+        console.log('this is error status',this.state.error)
+      });
+
+
+  
   }
 
   getCategoryItems =async (value)=>{
@@ -89,7 +109,7 @@ class AddItemOption extends React.Component{
   let report = (value)=>{
       console.log("in report",value);
   }
-    
+  if(this.state.categories.length>0){
     return (
       <div className="container">
           {this.state.submitted? <Redirect to="/additionaloption"/> : ""}
@@ -165,7 +185,17 @@ class AddItemOption extends React.Component{
 
       </div>
       </div>
-    );
+    )};
+    
+    
+    if(this.state.error){
+      console.log('not hello')
+  
+      return( <ErrorPage err={`${this.state.error}`} />)
+  
+    }
+  
+    return false;;
     }
 }
 
