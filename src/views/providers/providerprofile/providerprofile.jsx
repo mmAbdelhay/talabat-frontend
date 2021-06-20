@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import styles from "./providerProfile.module.css";
 import { getProviderInfo } from "../../../services/getProviderInfo";
 import { Tabs, Card } from "antd";
@@ -13,6 +12,9 @@ import {
   QuestionCircleOutlined,
 } from "@ant-design/icons";
 import { Collapse } from "antd";
+import Reviews from "./reviews";
+import ProviderExtraInfo from "./providerExtraInfo";
+
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
 
@@ -21,9 +23,11 @@ export default function ProviderProfile(props) {
   const [providerInformation, setProviderInformation] = useState({});
 
   useEffect(async () => {
-    const returnedInformation = await getProviderInfo(id);
-    setProviderInformation(returnedInformation?.data?.Provider);
-    console.log(providerInformation);
+    if (id) {
+      const returnedInformation = await getProviderInfo(id);
+      setProviderInformation(returnedInformation?.data?.Provider);
+      console.log(`provider profile`, providerInformation);
+    }
   }, []);
 
   return (
@@ -50,7 +54,10 @@ export default function ProviderProfile(props) {
               </span>
             }
           >
-            Reviews Tab
+            <Reviews
+              reviews={providerInformation?.Provider_reviews}
+              reviews_count={providerInformation?.reviews_count}
+            />
           </TabPane>
           <TabPane
             key="3"
@@ -60,7 +67,7 @@ export default function ProviderProfile(props) {
               </span>
             }
           >
-            Provider Extra Info Tab
+            <ProviderExtraInfo provider={providerInformation} />
           </TabPane>
         </Tabs>
         <div className={styles.cart_card}>
