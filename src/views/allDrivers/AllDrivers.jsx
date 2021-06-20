@@ -4,6 +4,9 @@ import axios from "axios";
 import { ServerIP } from "../../assets/config";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
+import ErrorPage from "../sharedComponents/ErrorPages/ErrorPage";
+
+
 
 const columns = [
   {
@@ -40,6 +43,8 @@ const columns = [
 
 export default function AllDrivers() {
   const [drivers, setDrivers] = useState([]);
+  const [error, setError] = useState("");
+
   const allDrivers = async () => {
     let response = await axios.get(
       `${ServerIP}/api/v1/superuser/get/alldrivers`,
@@ -48,18 +53,29 @@ export default function AllDrivers() {
           Authorization: "Token " + localStorage.getItem("token"),
         },
       }
-    );
-    if (response.status === 200) {
-      setDrivers(response.data?.Responses);
-    } else {
-      return false;
-    }
+    ).then((res)=>{
+      if (res.status === 200) {
+        setDrivers(res.data?.Responses);
+      }
+
+    }).catch((err) => {
+      if (err.response)
+        setError(err.response.status)
+      else 
+        setError(500)
+    
+    });
+    
   };
 
   useEffect(() => {
     allDrivers();
     console.log(drivers);
   }, []);
+
+
+
+  if(drivers.length>0){
 
   return (
     <div className="container">
@@ -71,4 +87,18 @@ export default function AllDrivers() {
       </Link>
     </div>
   );
+
+  }
+
+
+  if (error){
+    return( <ErrorPage err={`${error}`} />)
+   }
+
+
+
+   return false
+
+
+
 }
