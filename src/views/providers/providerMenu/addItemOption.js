@@ -195,7 +195,7 @@ class AddItemOption extends React.Component{
   
     }
   
-    return false;;
+    return false;
     }
 }
 
