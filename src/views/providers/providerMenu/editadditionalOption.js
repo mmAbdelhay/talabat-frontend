@@ -5,6 +5,7 @@ import { ServerIP } from "../../../assets/config";
 import { Form, Input, Button, Checkbox, InputNumber,Select , message } from 'antd';
 import UploadLogoInput from "../../sharedComponents/FormInputs/UploadLogoInput";
 import { withRouter } from "react-router-dom";
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 class EditadditionalOption extends React.Component{
 
@@ -13,6 +14,8 @@ class EditadditionalOption extends React.Component{
       this.state={
         token:localStorage.getItem("token"),
         additionalOptionId: this.props.match.params.id,
+        serverState:'',
+        error:''
       };
   }
 
@@ -27,15 +30,34 @@ class EditadditionalOption extends React.Component{
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
-    });
+    }).then((res) => {
+     
 
-    console.log('this is resppp',response.data)
+      console.log('in then',res)
+      this.setState({serverState:'up'});
 
-
-    this.formRef.current.setFieldsValue({
-        option_name: response.data.option_name,
-        additional_price: response.data.additional_price
+      this.formRef.current.setFieldsValue({
+        option_name: res.data.option_name,
+        additional_price: res.data.additional_price
       });
+  
+  
+    }).catch((err) => {
+      console.log('this is error ',err)
+      if (err.response)
+        this.setState({error: err.response.status})
+      else 
+      this.setState({error: 500}) 
+      
+      console.log('this is error status',this.state.error)
+    });
+    
+    
+    
+
+
+
+    
 
   }
 
@@ -90,7 +112,9 @@ class EditadditionalOption extends React.Component{
   let report = (value)=>{
       console.log("in report",value);
   }
-    
+
+
+    if(this.state.serverState==='up'){
     return (
       <div className="container">
           <div className="row">
@@ -148,7 +172,18 @@ class EditadditionalOption extends React.Component{
 
       </div>
       </div>
-    );
+    )};
+
+    if(this.state.error){
+      console.log('not hello')
+  
+      return( <ErrorPage err={`${this.state.error}`} />)
+  
+    }
+
+    return false
+    
+
     }
 }
 

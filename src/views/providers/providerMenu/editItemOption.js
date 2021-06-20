@@ -6,6 +6,7 @@ import { Form, Input, Button, Checkbox, InputNumber,Select , message } from 'ant
 import UploadLogoInput from "../../sharedComponents/FormInputs/UploadLogoInput";
 import { Redirect } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 class EditItemOption extends React.Component{
 
@@ -14,6 +15,8 @@ class EditItemOption extends React.Component{
       this.state={
         token:localStorage.getItem("token"),
         itemOptionId:this.props.match.params.id,
+        serverState:'',
+        error:''
       };
   }
 
@@ -30,14 +33,34 @@ class EditItemOption extends React.Component{
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
-    });
-    
-    this.formRef.current.setFieldsValue({
-        section_name: response.data.section_name,
-        section_type: response.data.section_type,
+    }).then((res) => {
+     
+
+      console.log('in then',res)
+      this.setState({serverState:'up'});
+
+      this.formRef.current.setFieldsValue({
+        section_name: res.data.section_name,
+        section_type: res.data.section_type,
         
   
       });
+  
+  
+    }).catch((err) => {
+      console.log('this is error ',err)
+      if (err.response)
+        this.setState({error: err.response.status})
+      else 
+      this.setState({error: 500}) 
+      
+      console.log('this is error status',this.state.error)
+    });
+    
+    
+    
+    
+   
   }
 
  
@@ -92,6 +115,7 @@ class EditItemOption extends React.Component{
       console.log("in report",value);
   }
     
+    if(this.state.serverState==='up'){
     return (
       <div className="container">
           <div className="row">
@@ -151,7 +175,22 @@ class EditItemOption extends React.Component{
 
       </div>
       </div>
-    );
+    )}
+
+
+
+    if(this.state.error){
+      console.log('not hello')
+  
+      return( <ErrorPage err={`${this.state.error}`} />)
+  
+    }
+  
+    return false;
+    
+    
+    
+    
     }
 }
 

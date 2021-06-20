@@ -4,6 +4,7 @@ import axios from "axios";
 import { ServerIP } from "../../../assets/config";
 import { Form, Input, Button, Checkbox,message } from 'antd';
 import { withRouter } from "react-router-dom";
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 
 
@@ -13,8 +14,9 @@ class EditCategory extends React.Component{
       super(props);
       this.state={
         token:localStorage.getItem("token"),
-        categoryName:  'hello',
-        categoryId:this.props.match.params.id
+        categoryName:  '',
+        categoryId:this.props.match.params.id,
+        error:"",
 
       };
   }
@@ -35,15 +37,30 @@ getCategoryName=async ()=>{
       headers:{
           Authorization: `Token ${this.state.token}`,
       }
-  });
-  this.setState({
-    categoryName:response.data.name,
-  },()=>console.log(this.state.categoryName))
+  }).then((res) => {
+     
+
+    console.log('in then',res)
+    this.setState({
+      categoryName:res.data.name,
+    },()=>console.log(this.state.categoryName))
+  
+  
+    this.formRef.current.setFieldsValue({
+      name: this.state.categoryName,
+    });
 
 
-  this.formRef.current.setFieldsValue({
-    name: this.state.categoryName,
+  }).catch((err) => {
+    console.log('this is error ',err)
+    if (err.response)
+      this.setState({error: err.response.status})
+    else 
+    this.setState({error: 500}) 
+    
+    console.log('this is error status',this.state.error)
   });
+  
 
 }
 
@@ -98,6 +115,11 @@ getCategoryName=async ()=>{
 
       console.log('this is id',this.props.match.params.id);
 
+      if(this.state.categoryName){
+
+
+
+      
        return (
 
         <div className="container">
@@ -146,7 +168,17 @@ getCategoryName=async ()=>{
 
             </div>
           </div>
-  );
+  )}
+  
+  if(this.state.error){
+    console.log('not hello')
+
+    return( <ErrorPage err={`${this.state.error}`} />)
+
+  }
+
+  return false
+  ;
   }
 }
 
