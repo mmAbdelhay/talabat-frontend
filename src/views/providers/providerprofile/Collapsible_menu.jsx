@@ -17,10 +17,10 @@ export default function CollapsibleMenu(props) {
       >
         {providerInformation?.Categories?.map((catItem) => {
           return (
-            <p key={catItem?.id}>
-              {catItem?.name}
+            <div key={catItem?.id}>
+              <p>{catItem?.name}</p>
               <hr />
-            </p>
+            </div>
           );
         })}
       </Card>
@@ -33,23 +33,22 @@ export default function CollapsibleMenu(props) {
       >
         {providerInformation?.Categories?.map((catItem) => {
           return (
-            <Panel header={catItem?.name} key={catItem?.id}>
-              <p>
+            <Panel key={catItem?.id} header={catItem?.name}>
+              <div>
                 {catItem?.Items?.map((item) => {
                   if (item?.availability) {
                     return (
-                      <>
+                      <div key={item?.id}>
                         <ItemComponent
                           item={item}
-                          key={item?.id}
                           providerId={providerInformation.id}
                         />
                         <hr />
-                      </>
+                      </div>
                     );
                   }
                 })}
-              </p>
+              </div>
             </Panel>
           );
         })}
