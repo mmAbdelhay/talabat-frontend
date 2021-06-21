@@ -5,7 +5,7 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import { ServerIP } from "../../../assets/config";
 import { Collapse } from 'antd';
-import { Form, Select, Button,Space  } from 'antd';
+import { Form, Select, Button,Space, message   } from 'antd';
 
 const { Panel } = Collapse;
 
@@ -111,8 +111,20 @@ class MenuEdit extends React.Component{
         headers: {
             'Authorization': `Token ${this.state.token}`
         }
-        },{}).catch((error)=>{
-            alert(error);
+        },{}).then((res) => {
+            message.success(`${res.data['Message']}`);
+            this.setState({
+                categories:[],
+                categoryID:"",
+                items:[],
+                itemID:"",
+                itemOptions:[],
+                itemOptionID:"",
+                itemAdditionalOptions:[],
+                itemAdditionalOptionID:""
+            })
+          }).catch((errorInfo)=>{
+                message.error("Please select what u want to delete");
         });
   }
 
@@ -185,6 +197,13 @@ routeChange(edittype) {
     console.log(key);
     this.setState({
         openCollapse:key,
+        categoryID:"",
+        items:[],
+        itemID:"",
+        itemOptions:[],
+        itemOptionID:"",
+        itemAdditionalOptions:[],
+        itemAdditionalOptionID:""
     },()=>console.log(this.state.openCollapse))
   } 
 

@@ -20,6 +20,8 @@ class AddItem extends React.Component{
       };
   }
 
+  formRef = React.createRef()
+
   async componentDidMount() {
     this.getCategories();
     this.setState({submitted:false});
@@ -56,6 +58,10 @@ class AddItem extends React.Component{
   };
 
   const onFinish = (values) => {
+    console.log(values);
+    if(this.state.logo===""){
+      message.error("Please upload item photo");
+    }else{
     axios.post(`${ServerIP}/api/v1/provider/items/add`, 
     {
         name:values.name,
@@ -67,12 +73,24 @@ class AddItem extends React.Component{
     {headers: {
         Authorization: `Token ${this.state.token}`,
     }}
-  );
+    ).then((res) => {
+      console.log("in then",res.data);
+      message.success(`${res.data.Message}`);
+      this.formRef.current.setFieldsValue({
+        name: "",
+        price:"",
+        summary:"",
+        category_id:undefined,
+      });
+    }).catch((res) => {
+      console.log("in catch",res.data);
+      message.error(`${res.data.Message}`);
+    });
     console.log(values);
     if(values.addItemOptions){
       this.setState({submitted:true});
     }
-
+  }
   };
   
   const onFinishFailed = (errorInfo) => {
@@ -96,6 +114,7 @@ class AddItem extends React.Component{
       name="basic"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      ref={this.formRef}
       >
           <Form.Item
               label="Item name"
@@ -103,7 +122,7 @@ class AddItem extends React.Component{
               rules={[
               {
                   required: true,
-                  message: 'Please input category name',
+                  message: 'Please input item name',
               },
               ]}
           >
@@ -116,7 +135,7 @@ class AddItem extends React.Component{
               rules={[
               {
                   required: true,
-                  message: 'Please input category name',
+                  message: 'Please input item summary',
               },
               ]}>
               <Input.TextArea />
@@ -127,7 +146,7 @@ class AddItem extends React.Component{
               rules={[
               {
                   required: true,
-                  message: 'Please input category name',
+                  message: 'Please input item price',
               },
               ]}>
                   <InputNumber  />
@@ -137,18 +156,29 @@ class AddItem extends React.Component{
           
           
 
-          <Form.Item label="Category" name="category_id">
+          <Form.Item label="Category" name="category_id"
+            rules={[
+              {
+                  required: true,
+                  message: 'Please select category name',
+              },
+            ]}>
               <Select>
               {this.state.categories.map(category=>{
-                  console.log("cat",category);
                   return(
-                  <Select.Option value={category.id}>{category.name}</Select.Option>
+                  <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>
                   )
               })}
               </Select>
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item
+          rules={[
+            {
+                required: true,
+                message: 'Please Select photo to upload',
+            },
+          ]}>
               <UploadLogoInput
                   onUploadLogoInputChange={(value) => this.setState({logo:value})}
               />

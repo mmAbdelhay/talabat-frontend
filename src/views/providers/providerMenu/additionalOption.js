@@ -17,6 +17,8 @@ class AdditionalOption extends React.Component{
       };
   }
 
+  formRef = React.createRef()
+
   async componentDidMount() {
     this.getCategories();
   }
@@ -86,7 +88,19 @@ class AdditionalOption extends React.Component{
         {headers: {
             Authorization: `Token ${this.state.token}`,
         }}
-    );
+    ).then((res) => {
+        message.success(`${res.data['Message']}`);
+        this.formRef.current.setFieldsValue({
+          option_name: "",
+          additional_price:"",
+          item_option_id:undefined,
+          category_id:undefined,
+          item_id:undefined
+        });
+      })
+      .catch((res) => {
+        message.error(`${res.data['Message']}`);
+      });
   };
   
   const onFinishFailed = (errorInfo) => {
@@ -111,6 +125,7 @@ class AdditionalOption extends React.Component{
       name="basic"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      ref={this.formRef}
       >
           <Form.Item
               label="Option name"
@@ -118,47 +133,70 @@ class AdditionalOption extends React.Component{
               rules={[
               {
                   required: true,
-                  message: 'Please input section name',
+                  message: 'Please input option',
               },
               ]}
           >
               <Input />
           </Form.Item>
 
-          <Form.Item label="Category" name="category_id">
+          <Form.Item label="Category" name="category_id"
+          rules={[
+            {
+                required: true,
+                message: 'Please select category',
+            },
+            ]}>
               <Select onChange={(value)=>this.getCategoryItems(value)}>
               {this.state.categories.map(category=>{
-                  console.log("cat",category);
                   return(
-                  <Select.Option value={category.id}>{category.name}</Select.Option>
+                  <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>
                   )
               })}
               </Select>
           </Form.Item>
 
-          <Form.Item label="Item" name="item_id">
+          <Form.Item label="Item" name="item_id"
+          rules={[
+            {
+                required: true,
+                message: 'Please select item',
+            },
+            ]}>
               <Select onChange={(value)=>this.getItemOptions(value)}>
               {this.state.items.map(item=>{
                   console.log("item",item);
                   return(
-                  <Select.Option value={item.id}>{item.name}</Select.Option>
+                  <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
                   )
               })}
               </Select>
           </Form.Item>
 
-          <Form.Item label="Item Option" name="item_option_id">
+          <Form.Item label="Item Option" name="item_option_id"
+          rules={[
+            {
+                required: true,
+                message: 'Please select item option',
+            },
+            ]}>
               <Select>
               {this.state.itemOptions.map(item_option=>{
                   console.log("item option",item_option);
                   return(
-                  <Select.Option value={item_option.id}>{item_option.section_name}</Select.Option>
+                  <Select.Option key={item_option.id} value={item_option.id}>{item_option.section_name}</Select.Option>
                   )
               })}
               </Select>
           </Form.Item>
 
-      <Form.Item label="Additional Price">
+      <Form.Item label="Additional Price"
+      rules={[
+        {
+            required: true,
+            message: 'Please add price',
+        },
+        ]}>
               <Form.Item name="additional_price" noStyle 
               rules={[
               {
