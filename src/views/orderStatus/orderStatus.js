@@ -5,6 +5,7 @@ import axios from "axios";
 import { LoadingOutlined } from '@ant-design/icons';
 import {  Button  } from 'antd';
 import { ServerIP } from "../../assets/config";
+import ErrorPage from "../sharedComponents/ErrorPages/ErrorPage";
 const { Step } = Steps;
 
 
@@ -18,6 +19,9 @@ class OrderStatus extends React.Component{
         token:localStorage.getItem("token"),
         currentGif:"",
         orderID:this.props.match.params.id,
+        error:'',
+        serverState:''
+
       };
   }
 
@@ -32,11 +36,30 @@ class OrderStatus extends React.Component{
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
-    });
-    let current=states.indexOf(response.data.orderStatus.order_status)
+    }).then((res) => {
+     
+
+      console.log('in then',res)
+      
+     
+    let current=states.indexOf(res.data.orderStatus.order_status)
     console.log(current);
-    this.setState({currentState:current,currentGif:response.data.orderStatus.order_status})
+    this.setState({currentState:current,currentGif:res.data.orderStatus.order_status,serverState:"up"})
     console.log(this.props.match.params.id);
+  
+    }).catch((err) => {
+      console.log('this is error ',err)
+      if (err.response)
+        this.setState({error: err.response.status})
+      else 
+      this.setState({error: 500}) 
+      
+      console.log('this is error status',this.state.error)
+    });
+    
+    
+    
+    
     }
 
     refresh=()=>{
@@ -46,6 +69,7 @@ class OrderStatus extends React.Component{
 
   render(){
       
+       if(this.state.serverState==='up'){
        return (
         <div>
         <Button type="primary" onClick={this.refresh}>Refresh</Button>
@@ -63,7 +87,17 @@ class OrderStatus extends React.Component{
         </Steps>
         </div>
           
-       );
+       )};
+
+
+       if(this.state.error){
+        console.log('not hello')
+    
+        return( <ErrorPage err={`${this.state.error}`} />)
+    
+      }
+    
+      return false;
   }
 }
 

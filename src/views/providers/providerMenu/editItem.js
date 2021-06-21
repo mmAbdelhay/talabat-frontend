@@ -6,6 +6,7 @@ import { Form, Input, Button, Checkbox, InputNumber,Select , Steps, message } fr
 import UploadLogoInput from "../../sharedComponents/FormInputs/UploadLogoInput";
 import { Redirect } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 const { Step } = Steps;
 
@@ -19,6 +20,8 @@ class EditItem extends React.Component{
         categories:[],
         itemBody:[],
         itemId:this.props.match.params.id,
+        error:"",
+
       };
   }
 
@@ -40,19 +43,33 @@ class EditItem extends React.Component{
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
-    });
+    }).then((res) => {
+     
 
-    console.log('thisis item',response.data)
-   
-    this.setState({logo:response.data.logo});
+      console.log('in then',res)
+      this.setState({logo:res.data.logo});
 
     this.formRef.current.setFieldsValue({
-      name: response.data.name,
-      summary: response.data.summary,
-      price: response.data.price,
+      name: res.data.name,
+      summary: res.data.summary,
+      price: res.data.price,
       logo:this.state.logo
 
     });
+  
+  
+    }).catch((err) => {
+      console.log('this is error ',err)
+      if (err.response)
+        this.setState({error: err.response.status})
+      else 
+      this.setState({error: 500}) 
+      
+      console.log('this is error status',this.state.error)
+    });
+
+   
+    
   
   }
 
@@ -104,7 +121,8 @@ class EditItem extends React.Component{
       console.log('Failed:', errorInfo);
   };
         
-    
+
+    if(this.state.logo) {
     return (
       <div className="container">
           <div className="row">
@@ -182,7 +200,18 @@ class EditItem extends React.Component{
 
       </div>
       </div>
-    );
+    )}
+    
+
+
+    if(this.state.error){
+      console.log('not hello')
+  
+      return( <ErrorPage err={`${this.state.error}`} />)
+  
+    }
+  
+    return false;
     }
 }
 

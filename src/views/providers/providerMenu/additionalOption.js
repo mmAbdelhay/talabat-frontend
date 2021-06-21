@@ -4,6 +4,7 @@ import axios from "axios";
 import { ServerIP } from "../../../assets/config";
 import { Form, Input, Button, Checkbox, InputNumber,Select , message } from 'antd';
 import UploadLogoInput from "../../sharedComponents/FormInputs/UploadLogoInput";
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 class AdditionalOption extends React.Component{
 
@@ -14,6 +15,8 @@ class AdditionalOption extends React.Component{
         categories:[],
         items:[],
         itemOptions:[],
+        error:''
+
       };
   }
 
@@ -28,10 +31,28 @@ class AdditionalOption extends React.Component{
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
-    });
+    }).then((res) => {
+     
+
+        console.log('in then',res)
+        
     this.setState({
-        categories:response.data,
+        categories:res.data,
     },()=>console.log(this.state.categories))
+        
+    
+      }).catch((err) => {
+        console.log('this is error ',err)
+        if (err.response)
+          this.setState({error: err.response.status})
+        else 
+        this.setState({error: 500}) 
+        
+        console.log('this is error status',this.state.error)
+      });
+
+
+
   }
 
   getCategoryItems =async (value)=>{
@@ -110,7 +131,7 @@ class AdditionalOption extends React.Component{
   let report = (value)=>{
       console.log("in report",value);
   }
-    
+  if(this.state.categories.length>0){
     return (
       <div className="container">
           <div className="row">
@@ -222,7 +243,20 @@ class AdditionalOption extends React.Component{
 
       </div>
       </div>
-    );
+    )};
+    
+    
+    if(this.state.error){
+      console.log('not hello')
+  
+      return( <ErrorPage err={`${this.state.error}`} />)
+  
+    }
+  
+    return false;
+    
+    
+
     }
 }
 

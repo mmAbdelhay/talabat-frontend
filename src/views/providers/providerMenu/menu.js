@@ -6,6 +6,7 @@ import axios from "axios";
 import { ServerIP } from "../../../assets/config";
 import { Collapse } from 'antd';
 import { Form, Select, Button,Space, message   } from 'antd';
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 const { Panel } = Collapse;
 
@@ -25,6 +26,7 @@ class MenuEdit extends React.Component{
         openCollapse:0,
         itemAdditionalOptions:[],
         itemAdditionalOptionID:"",
+        error:"",
       };
   }
 
@@ -37,11 +39,24 @@ class MenuEdit extends React.Component{
             headers:{
                 Authorization: `Token ${this.state.token}`,
             }
-        });
+        }).then((res) => {
+     
 
-        this.setState({
-            categories:response.data,
-        },()=>console.log(this.state.categories))
+            console.log('in then',res)
+      
+            this.setState({
+                categories:res.data,
+            },()=>console.log(this.state.categories))
+          })
+          .catch((err) => {
+            console.log('in catch',err)
+            if (err.response)
+              this.setState({error: err.response.status})
+            else 
+            this.setState({error: 500})    
+          });;
+
+        
     }
 
     getCategoryItems =async (value)=>{
@@ -93,7 +108,7 @@ class MenuEdit extends React.Component{
     }
   };
 
-  Delete=()=>{
+  Delete=async()=>{
       console.log("category ID",this.state.categoryID);
       console.log("item ID",this.state.itemID);
       let axios_Link="";
@@ -107,7 +122,7 @@ class MenuEdit extends React.Component{
         axios_Link = `${ ServerIP }/api/v1/provider/itemadditionaloptions/delete/${this.state.itemAdditionalOptionID}`;
       }
       console.log("axios link",axios_Link);
-      axios.delete(`${ axios_Link }`,{
+      await axios.delete(`${ axios_Link }`,{
         headers: {
             'Authorization': `Token ${this.state.token}`
         }
@@ -123,9 +138,17 @@ class MenuEdit extends React.Component{
                 itemAdditionalOptions:[],
                 itemAdditionalOptionID:""
             })
-          }).catch((errorInfo)=>{
+          }).catch((err)=>{
                 message.error("Please select what u want to delete");
+                if (err.response)
+                this.setState({error: err.response.status})
+                else 
+                this.setState({error: 500}) 
+                
+                console.log('this is error status',this.state.error)
         });
+        
+
   }
 
   Edit =()=>{
@@ -207,7 +230,9 @@ routeChange(edittype) {
     },()=>console.log(this.state.openCollapse))
   } 
 
+
   render(){ 
+    if(this.state.categories.length>0 && !(this.state.error)){
     return (
       <div className="container">
         <div className="row">
@@ -376,7 +401,19 @@ routeChange(edittype) {
             <div className="col"></div>
         </div>
       </div>
-    );
+    )}
+    ;
+
+    if(this.state.error){
+        console.log('not hello')
+
+        return( <ErrorPage err={`${this.state.error}`} />)
+
+      }
+
+      return false
+
+
     }
 }
 

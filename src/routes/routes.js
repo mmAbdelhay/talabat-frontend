@@ -112,7 +112,6 @@ export default function Routes() {
       </Route>
       <Route path="/orderstate" exact>
         <PendingOrders />
-        <UnApprovedProviders />
       </Route>
 
       <Route path="/orderstatus/:id" component={OrderStatus} />

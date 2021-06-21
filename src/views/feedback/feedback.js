@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import { Form } from 'react-bootstrap'
-import { serverIP } from '../../assets/config'
+import { ServerIP } from "../../assets/config";
+import axios from "axios";
+import { message } from "antd";
+
 const Feedback = () => {
 
 const [experience, setExperience] = useState('')
@@ -18,23 +21,34 @@ const submitFeedback = async (e) => {
 
     console.log(feed);
 
-    let res = await fetch('http://localhost:5000/api/v1/feedback',{
+    // let res = await fetch('http://localhost:5000/api/v1/feedback',{
 
-        method: 'POST',
-        headers:{"Content-Type" : "application/json"},
-        body:JSON.stringify(feed)
+    //     method: 'POST',
+    //     headers:{"Content-Type" : "application/json"},
+    //     body:JSON.stringify(feed)
 
 
+    // })
+
+
+    axios
+    .post(`${ServerIP}/api/v1/feedback`, feed,)
+    .then((res) => {
+      message.success("your feedback sent successfully");
+      window.location.href = "/";
     })
+    .catch((err) => {
+        if(err.response)
+            message.error(err);
+        else
+            message.error('server is down')
+      console.log(err);
+    });
     
 
     console.log(JSON.stringify(feed))
 
 
-    let resJson = await res.json();
-
-
-    console.log(resJson);
 
 
 

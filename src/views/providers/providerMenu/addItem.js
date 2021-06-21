@@ -5,6 +5,7 @@ import { ServerIP } from "../../../assets/config";
 import { Form, Input, Button, Checkbox, InputNumber,Select , Steps, message } from 'antd';
 import UploadLogoInput from "../../sharedComponents/FormInputs/UploadLogoInput";
 import { Redirect } from "react-router-dom";
+import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 const { Step } = Steps;
 
@@ -17,6 +18,7 @@ class AddItem extends React.Component{
         logo:"",
         categories:[],
         submitted:false,
+        error:''
       };
   }
 
@@ -32,10 +34,30 @@ class AddItem extends React.Component{
         headers:{
             Authorization: `Token ${this.state.token}`,
         }
-    });
-    this.setState({
-        categories:response.data,
+    }).then((res) => {
+     
+
+      console.log('in then',res)
+      this.setState({
+        categories:res.data,
     },()=>console.log(this.state.categories))
+   
+  
+  
+    }).catch((err) => {
+      console.log('this is error ',err)
+      if (err.response)
+        this.setState({error: err.response.status})
+      else 
+      this.setState({error: 500}) 
+      
+      console.log('this is error status',this.state.error)
+    });
+    
+    
+    
+    
+  
 
   }
 
@@ -97,7 +119,7 @@ class AddItem extends React.Component{
       console.log('Failed:', errorInfo);
   };
         
-    
+    if(this.state.categories.length>0){
     return (
       <div className="container">
         {this.state.submitted? <Redirect to="/additemoption"/> : ""}
@@ -200,7 +222,17 @@ class AddItem extends React.Component{
 
       </div>
       </div>
-    );
+    )};
+    
+    
+    if(this.state.error){
+      console.log('not hello')
+  
+      return( <ErrorPage err={`${this.state.error}`} />)
+  
+    }
+  
+    return false;
     }
 }
 

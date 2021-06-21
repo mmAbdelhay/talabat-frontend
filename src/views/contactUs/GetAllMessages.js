@@ -6,23 +6,45 @@ import "antd/dist/antd.css";
 import { checkRole } from "../../services/CheckUserRole";
 import { checkIfLoggedIn } from "../../services/CheckUserStatus";
 import { Link } from "react-router-dom";
+import ErrorPage from "../sharedComponents/ErrorPages/ErrorPage";
+
 
 export default function GetAllMessages() {
   const [token, setToken] = useState("");
   const [isSuperUser, setSuperUser] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [error, setError] = useState("");
+
 
   const getAllMessages = async (token) => {
     let response = await axios.get(`${ServerIP}/api/v1/forms/contactus`, {
       headers: {
         Authorization: `Token ${token}`,
       },
-    });
-    if (response.status === 200) {
-      setMessages(response.data?.Responses);
-    } else {
-      return false;
-    }
+    }).then((res)=>{
+      if (res.status === 200) {
+        setMessages(res.data?.Responses);
+      }
+
+    }).catch((err) => {
+      if (err.response)
+
+        {
+          console.log('this is not hello',err.response.status)
+          setError(err.response.status)
+        }
+      else 
+      {
+        
+        
+        setError(500)
+        
+        console.log('hello this is error',error)
+      }
+
+    
+    });;
+   
   };
 
   useEffect(() => {
@@ -36,6 +58,9 @@ export default function GetAllMessages() {
     getAllMessages(token);
   }, [token]);
 
+
+
+  if(messages.length>0){
   return (
     <div>
       {messages.length > 0 ? (
@@ -56,4 +81,15 @@ export default function GetAllMessages() {
       </Link>
     </div>
   );
+  }
+
+
+  if (error){
+
+    return( <ErrorPage err={`${error}`} />)
+   }
+
+
+
+   return false
 }
