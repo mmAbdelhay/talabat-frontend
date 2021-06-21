@@ -4,6 +4,10 @@ import "antd/dist/antd.css";
 import {  Table, Tag, Space  } from 'antd';
 import {  Button  } from 'antd';
 import CouponPanelComponent from './couponPanelComponent'
+import ErrorPage from "../sharedComponents/ErrorPages/ErrorPage";
+import axios from "axios";
+import { ServerIP } from "../../assets/config";
+import { message } from "antd";
 
 const CouponPanel = () => {
 
@@ -11,46 +15,45 @@ const CouponPanel = () => {
     
     const [coupons, setCoupons] = useState([]);
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [error, setError] = useState("");
+    const [serverState,setState]= useState("")
+
 
     useEffect( () => {
 
-        const getCoupons = async () => {
-            const allCoupons = await fetchCoupons()
-            setCoupons(allCoupons)
+       
 
-
-
-            
-
-
-        }
-
-        getCoupons();
+        fetchCoupons();
 
     },[] );
 
 
-/////////////////////////////////////////////////// fetch orders////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// fetch coupons////////////////////////////////////////////////////////
     const fetchCoupons = async () => {
 
-        console.log('coupons in fetch')
 
-        const res = await fetch('http://localhost:5000/api/v1/superuser/coupons/getall',{
-            mehtod: 'GET',
 
-            headers:{
-                Authorization: `Token ${token}`,
-            }
+
+
+        
+        await axios
+        .get(`${ServerIP}/api/v1/superuser/coupons/getall`,{
+            headers: {
+                Authorization:`Token ${token}`
+              }
+          })
+        .then((res) => {
+         console.log('this is res',res)
+         setCoupons(res.data)
+         setState('up')
+        })
+        .catch((err) => {
+            if (err.response)
+              setError(err.response.status)
+            else 
+              setError(500)
+          
         });
-
-        
-        
-        const data = await res.json();
-        
-        console.log('coupons data: ', data)
-
-
-        return data
 
     }
 
@@ -87,7 +90,7 @@ const CouponPanel = () => {
 
 
 
-/////////////////////////////////////////////////// delete orders ////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// delete coupons ////////////////////////////////////////////////////////
 
 const deleteCoupon = async (id) => {
 
@@ -105,18 +108,33 @@ const deleteCoupon = async (id) => {
 
     // )
 
-    console.log(id);
-    
-    setCoupons(coupons.filter( (coupon) => coupon.id !== id ))
+ 
 
 
+    await axios
+    .delete(`${ServerIP}/api/v1/superuser/coupons/delete/${id}`,{
+        headers: {
+            Authorization:`Token ${token}`
+          }
+      }).then((res) => {
+          
+        setCoupons(coupons.filter( (coupon) => coupon.id !== id ))
+
+      })
+      .catch((err) => {
+          if(err.response)
+              message.error(err);
+          else
+              message.error('server is down')
+        console.log(err);
+      });
 
 }
 
 
 
     
-
+    if(serverState==='up'){
     return(
 
     <div className="container">
@@ -139,7 +157,13 @@ const deleteCoupon = async (id) => {
         </div>
     </div>
 
-    )
+    )}
+
+    if (error){
+        return( <ErrorPage err={`${error}`} />)
+       }
+     
+    return false
 }
 
 
