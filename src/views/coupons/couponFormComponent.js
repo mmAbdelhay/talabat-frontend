@@ -25,6 +25,15 @@ import { Form, Input, Button, DatePicker, InputNumber} from 'antd';
         const onFinishFailed = (errorInfo) => {
           console.log('Failed:', errorInfo);
         };
+
+
+        const disabledDate = (current) => {
+          // Can not select days before today and today
+
+          console.log('this is current',current)
+
+          return current < Date.now();
+        }
       
         return (
           <Form
@@ -66,7 +75,11 @@ import { Form, Input, Button, DatePicker, InputNumber} from 'antd';
                   message: 'Please input coupon expiration date!',
                 },
               ]}>
-                <DatePicker />
+                <DatePicker 
+                 
+                 disabledDate={disabledDate}
+                
+                />
             </Form.Item>
             
       
