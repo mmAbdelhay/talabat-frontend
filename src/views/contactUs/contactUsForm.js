@@ -28,7 +28,7 @@ export default function ContactUsForm() {
         message.success("your message sent successfully");
       })
       .catch((err) => {
-        message.error("there's an error sending your message");
+        message.error(`form is invalid ${err.response.data.Message}`);
       });
   };
 

@@ -18,7 +18,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  const login = () => {
+  const handleLogin = async () => {
     axios
       .post(`${ServerIP}/api/v1/${role}/authenticate/login`, {
         email: email,
@@ -32,8 +32,7 @@ export default function LoginForm() {
         window.location.href = "/";
       })
       .catch((err) => {
-        message.error("form is invalid");
-        console.log(err);
+        message.error(`form is invalid ${err.response.data.Message}`);
       });
   };
 
@@ -112,7 +111,7 @@ export default function LoginForm() {
             type="primary"
             block
             htmlType="submit"
-            onClick={login}
+            onClick={handleLogin}
             disabled={
               !form.isFieldsTouched(true) ||
               !!form.getFieldsError().filter(({ errors }) => errors.length)

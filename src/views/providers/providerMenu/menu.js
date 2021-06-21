@@ -5,7 +5,7 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import { ServerIP } from "../../../assets/config";
 import { Collapse } from 'antd';
-import { Form, Select, Button,Space  } from 'antd';
+import { Form, Select, Button,Space, message   } from 'antd';
 import ErrorPage from "../../sharedComponents/ErrorPages/ErrorPage";
 
 const { Panel } = Collapse;
@@ -126,15 +126,28 @@ class MenuEdit extends React.Component{
         headers: {
             'Authorization': `Token ${this.state.token}`
         }
-        },{}).catch((err) => {
-            console.log('this is error ',err)
-            if (err.response)
-              this.setState({error: err.response.status})
-            else 
-            this.setState({error: 500}) 
-            
-            console.log('this is error status',this.state.error)
-          });
+        },{}).then((res) => {
+            message.success(`${res.data['Message']}`);
+            this.setState({
+                categories:[],
+                categoryID:"",
+                items:[],
+                itemID:"",
+                itemOptions:[],
+                itemOptionID:"",
+                itemAdditionalOptions:[],
+                itemAdditionalOptionID:""
+            })
+          }).catch((err)=>{
+                message.error("Please select what u want to delete");
+                if (err.response)
+                this.setState({error: err.response.status})
+                else 
+                this.setState({error: 500}) 
+                
+                console.log('this is error status',this.state.error)
+        });
+        
 
   }
 
@@ -207,6 +220,13 @@ routeChange(edittype) {
     console.log(key);
     this.setState({
         openCollapse:key,
+        categoryID:"",
+        items:[],
+        itemID:"",
+        itemOptions:[],
+        itemOptionID:"",
+        itemAdditionalOptions:[],
+        itemAdditionalOptionID:""
     },()=>console.log(this.state.openCollapse))
   } 
 

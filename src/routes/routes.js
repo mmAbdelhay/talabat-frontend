@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { message } from "antd";
 
@@ -44,10 +44,21 @@ import ReviewProvider from "../views/reviewProvider";
 import AllDrivers from "../views/allDrivers/AllDrivers";
 import GetAllMessages from "../views/contactUs/GetAllMessages";
 import AddDriver from "../views/addDriver/addDriver";
+import jwt_decode from "jwt-decode";
 
 export default function Routes() {
-  const [status] = checkIfLoggedIn();
+  const [status, token] = checkIfLoggedIn();
   const role = checkRole();
+
+  useEffect(() => {
+    if (status) {
+      let decode = jwt_decode(token);
+      if (parseInt(Date.now().toString().slice(0, -3)) > parseInt(decode.exp)) {
+        localStorage.clear();
+      }
+    }
+  }, []);
+
   return (
     <div className="container">
       <Route path="/" exact>

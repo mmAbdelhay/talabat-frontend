@@ -139,11 +139,17 @@ class AddItemOption extends React.Component{
                         <Input />
                     </Form.Item>
 
-                    <Form.Item label="Section Type" name="section_type">
+                    <Form.Item label="Section Type" name="section_type"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please select type',
+                        },
+                        ]}>
                         <Select>
                         
-                            <Select.Option value="RadioButton">RadioButton</Select.Option>
-                            <Select.Option value="CheckBox">CheckBox</Select.Option>
+                            <Select.Option key="1" value="RadioButton">RadioButton</Select.Option>
+                            <Select.Option key="2" value="CheckBox">CheckBox</Select.Option>
                             
                         </Select>
                     </Form.Item>
@@ -151,23 +157,34 @@ class AddItemOption extends React.Component{
                     
 
 
-                    <Form.Item label="Category" name="category_id">
+                    <Form.Item label="Category" name="category_id"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please select category',
+                        },
+                        ]}>
                         <Select onChange={(value)=>this.getCategoryItems(value)}>
                         {this.state.categories.map(category=>{
-                            console.log("cat",category);
                             return(
-                            <Select.Option value={category.id}>{category.name}</Select.Option>
+                            <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>
                             )
                         })}
                         </Select>
                     </Form.Item>
 
-                    <Form.Item label="Item" name="item_id">
+                    <Form.Item label="Item" name="item_id"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please select item',
+                        },
+                        ]}>
                         <Select>
                         {this.state.items.map(item=>{
                             console.log("item",item);
                             return(
-                            <Select.Option value={item.id}>{item.name}</Select.Option>
+                            <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
                             )
                         })}
                         </Select>

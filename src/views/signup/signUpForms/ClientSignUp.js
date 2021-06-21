@@ -1,7 +1,7 @@
 import { ServerIP } from "../../../assets/config";
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Button } from "antd";
+import { Form, Button, message } from "antd";
 import "antd/dist/antd.css";
 import CountrySelector from "../../sharedComponents/CountrySelector";
 import MobileInput from "../../sharedComponents/FormInputs/MobileInput";
@@ -11,7 +11,7 @@ import EmailInput from "../../sharedComponents/FormInputs/EmailInput";
 import DateOfBirth from "../../sharedComponents/FormInputs/DateOfBirth";
 import GenderInput from "../../sharedComponents/FormInputs/GenderInput";
 import PlacesAutocomplete from "../../map/PlacesAutocomplete";
-import MapModal from '../../map/MapModal';
+import MapModal from "../../map/MapModal";
 
 export default function ClientSignUp() {
   const [email, setEmail] = useState("");
@@ -32,9 +32,9 @@ export default function ClientSignUp() {
         country: country,
         mobile: mobile,
         date_of_birth: dateOfBirth,
-        type:"Home",
-        clientLAt:10.1 ,
-        clientLng:10.1 ,
+        type: "Home",
+        clientLAt: 10.1,
+        clientLng: 10.1,
       })
       .then((res) => {
         console.log(res.data);
@@ -42,8 +42,7 @@ export default function ClientSignUp() {
         window.location.href = "/login";
       })
       .catch((err) => {
-        alert("form is invalid");
-        console.log(err);
+        message.error(`form is invalid ${err.response.data.Message}`);
       });
   };
 
@@ -61,10 +60,11 @@ export default function ClientSignUp() {
         />
         <DateOfBirth onSelectDateOfBirth={(value) => setDateOfBirth(value)} />
         <GenderInput onGenderChange={(value) => setGender(value)} />
-        <PlacesAutocomplete />
-        <MapModal operation = {"register"}/>
-        <br></br>
-        <Form.Item>
+        <div style={{ marginTop: 10, marginBottom: 10 }}>
+          <PlacesAutocomplete />
+          <MapModal operation={"register"} />
+        </div>
+        <Form.Item style={{ marginTop: "10px" }}>
           <Button block type="primary" htmlType="submit" onClick={signUp}>
             SignUp
           </Button>

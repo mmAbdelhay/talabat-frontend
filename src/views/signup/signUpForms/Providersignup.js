@@ -1,7 +1,7 @@
 import { ServerIP } from "../../../assets/config";
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, InputNumber, Button, TimePicker } from "antd";
+import { Form, InputNumber, Button, TimePicker, message } from "antd";
 import "antd/dist/antd.css";
 import CountrySelector from "../../sharedComponents/CountrySelector";
 import NameInput from "../../sharedComponents/FormInputs/NameInput";
@@ -28,7 +28,6 @@ export default function ProviderSignUp() {
   const [delivery_fee, setDelivery_fee] = useState("");
 
   const signUp = () => {
-   
     const payload = {
       email: email,
       password: password,
@@ -53,7 +52,7 @@ export default function ProviderSignUp() {
         alert(res.data.Message);
       })
       .catch((err) => {
-        console.log(err);
+        message.error(`form is invalid ${err.response.data.Message}`);
       });
   };
 

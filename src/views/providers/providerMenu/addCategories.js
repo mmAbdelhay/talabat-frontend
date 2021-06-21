@@ -2,7 +2,7 @@ import React from 'react';
 import "antd/dist/antd.css";
 import axios from "axios";
 import { ServerIP } from "../../../assets/config";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 
 
 
@@ -14,6 +14,8 @@ class AddCategory extends React.Component{
         token:localStorage.getItem("token"),
       };
   }
+
+  formRef = React.createRef()
 
   render(){
     const layout = {
@@ -39,11 +41,20 @@ class AddCategory extends React.Component{
             {headers: {
                 Authorization: `Token ${this.state.token}`,
             }}
-        );
+        ).then((res) => {
+          message.success(`${res.data['Message']}`);
+          this.formRef.current.setFieldsValue({
+            name: "",
+          });
+        })
+        .catch((res) => {
+          message.error(`${res.data['Message']}`);
+        });
       };
     
       const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        // console.log('Failed:', errorInfo);
+        message.error(errorInfo.errorFields[0].errors[0]);
       };
 
        return (
@@ -63,6 +74,7 @@ class AddCategory extends React.Component{
                       name="basic"
                       onFinish={onFinish}
                       onFinishFailed={onFinishFailed}
+                      ref={this.formRef}
                     >
                       <Form.Item
                         label="Category name"
