@@ -60,10 +60,11 @@ export default function ClientSignUp() {
         />
         <DateOfBirth onSelectDateOfBirth={(value) => setDateOfBirth(value)} />
         <GenderInput onGenderChange={(value) => setGender(value)} />
-        <PlacesAutocomplete />
-        <MapModal operation={"register"} />
-        <br></br>
-        <Form.Item>
+        <div style={{ marginTop: 10, marginBottom: 10 }}>
+          <PlacesAutocomplete />
+          <MapModal operation={"register"} />
+        </div>
+        <Form.Item style={{ marginTop: "10px" }}>
           <Button block type="primary" htmlType="submit" onClick={signUp}>
             SignUp
           </Button>
