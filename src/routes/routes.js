@@ -44,6 +44,7 @@ import ReviewProvider from "../views/reviewProvider";
 import AllDrivers from "../views/allDrivers/AllDrivers";
 import GetAllMessages from "../views/contactUs/GetAllMessages";
 import AddDriver from "../views/addDriver/addDriver";
+import Careers from "../views/career/Career";
 import jwt_decode from "jwt-decode";
 
 export default function Routes() {
@@ -102,6 +103,9 @@ export default function Routes() {
       </Route>
       <Route path="/feedback" exact>
         <Feedback />
+      </Route>
+      <Route path="/careers" exact>
+        <Careers />
       </Route>
       <Route path="/privacy" exact>
         <Privacy />

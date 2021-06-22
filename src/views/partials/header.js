@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav ,NavDropdown} from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { checkIfLoggedIn } from "../../services/CheckUserStatus";
 import { checkRole } from "../../services/CheckUserRole";
 export default function Header() {
@@ -13,8 +13,8 @@ export default function Header() {
     const role = checkRole();
     if (isLoggedIn) setLoginStatus(true);
     if (role === "superuser") setSuperUser(true);
-    if(role === "provider") setProvider(true);
-    if(role === "client") setClient(true);
+    if (role === "provider") setProvider(true);
+    if (role === "client") setClient(true);
   }, []);
 
   const logout = () => {
@@ -31,34 +31,57 @@ export default function Header() {
           <Link className="nav-link text-white " to="/allRestaurants">
             all Restaurants
           </Link>
-        
-        
-        {isSuperUser ? (
-          <>
-            <Link to="/unapproved" className=" nav-link text-white">nonapproved providers</Link>
-            <Link to="/coupon/panel" className=" nav-link text-white">All Coupons</Link>
-            <Link to="/coupon/create" className=" nav-link text-white">Create Coupon</Link>
-          </>
-          ):("")}
+          {isSuperUser ? (
+            <>
+              <Link to="/unapproved" className=" nav-link text-white">
+                nonapproved providers
+              </Link>
+              <Link to="/coupon/panel" className=" nav-link text-white">
+                All Coupons
+              </Link>
+              <Link to="/coupon/create" className=" nav-link text-white">
+                Create Coupon
+              </Link>
+            </>
+          ) : (
+            ""
+          )}
           {isClient ? (
-            <Link to="/myorders" className=" nav-link text-white">my orders</Link>
-          ):("")}
+            <Link to="/myorders" className=" nav-link text-white">
+              my orders
+            </Link>
+          ) : (
+            ""
+          )}
           {isProvider ? (
             <>
-            <Link to="/orderstate" className=" nav-link text-white">order state</Link>
-            <NavDropdown title="Create Menu"  className="text-white">
-              <NavDropdown.Item href="/addcategory">Add Category</NavDropdown.Item>
-              <NavDropdown.Item href="/additem">add item</NavDropdown.Item>
-              <NavDropdown.Item href="additemoption">item option</NavDropdown.Item>
-              <NavDropdown.Item href="/additionaloption">additional options</NavDropdown.Item>
-            </NavDropdown>
-            <Link to="/menu/edit" className=" nav-link text-white">Edit Menu</Link>
+              <Link to="/orderstate" className=" nav-link text-white">
+                order state
+              </Link>
+              <NavDropdown title="Create Menu" className="text-white">
+                <NavDropdown.Item href="/addcategory">
+                  Add Category
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/additem">add item</NavDropdown.Item>
+                <NavDropdown.Item href="additemoption">
+                  item option
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/additionaloption">
+                  additional options
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Link to="/menu/edit" className=" nav-link text-white">
+                Edit Menu
+              </Link>
             </>
-          ):("")
-          }
+          ) : (
+            ""
+          )}
+          <Link className="nav-link" to="/careers">
+            Careers
+          </Link>
         </Nav>
         <Nav>
-          
           {!loginStatus ? (
             <>
               <Link to="/login" className="nav-item nav-link">
