@@ -1,62 +1,49 @@
 import React, { Component } from "react";
-import SimpleReactFooter from "simple-react-footer";
+import "./footer.css";
+import { Link } from "react-router-dom";
+
 class Footer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
-    const title = "Talabatk";
-    const columns = [
-      {
-        title: "Resources",
-        resources: [
-          {
-            name: "FAQ",
-            link: "/faq",
-          },
-          {
-            name: "FeedBack",
-            link: "/feedback",
-          },
-          {
-            name: "Contact Us",
-            link: "/contactus",
-          },
-        ],
-      },
-      {
-        title: "Legal",
-        resources: [
-          {
-            name: "Privacy",
-            link: "/privacy",
-          },
-          {
-            name: "Terms & conditions",
-            link: "/terms",
-          },
-        ],
-      },
-    ];
+
     return (
-      <SimpleReactFooter
-        title={title}
-        columns={columns}
-        linkedin=""
-        facebook=""
-        twitter=""
-        instagram=""
-        youtube=""
-        pinterest=""
-        copyright="talabatk"
-        iconColor="white"
-        backgroundColor="#262626"
-        fontColor="white"
-        copyrightColor="white"
-      />
+
+      <footer style={{marginTop:250}}>
+        <div className="column">
+        <a className="footer_title">Talabatak</a>
+        <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+        </div>
+        <div className="column">
+        <a className="footer_title">OTHER LINKS</a>
+        <Link to="/privacy">Privacy Policy</Link>
+        <Link to="/terms">Terms & Conditions</Link>
+        <Link to="/faq">FAQ</Link>
+        <Link to="/feedback">FeedBack</Link>
+        <Link to="/contactus">Contact Us</Link>
+        </div>
+        
+        <div className="column">
+        <a className="footer_title">LATEST NEWS</a>
+        <a href="" title="Lorem ipsum dolor sit amet"><img src="https://source.unsplash.com/50x50/?green,trees"></img></a>
+
+        </div>
+        <div className="column">
+        <a className="footer_title">GET IN TOUCH</a>
+        <a title="Address"><i className="fa fa-map-marker"></i> 007, street, province/state, country - zipcode</a>
+        <a href="emailto:" title="Email"><i className="fa fa-envelope"></i> email@serviceprovider.domain</a>
+        <a href="tel:" title="Contact"><i className="fa fa-phone"></i> +(x)-xxxx-xxxxx</a>
+        </div>
+
+        <div className="sub-footer">
+        © CopyRights 2021 Company_name || All rights reserved
+        </div>
+      </footer>
     );
   }
 }
 
 export default Footer;
+
