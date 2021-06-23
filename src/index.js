@@ -10,7 +10,7 @@ import Footer from "./views/partials/footer";
 ReactDOM.render(
   <Router>
     <Header />
-    <Routes></Routes>
+    <Routes ></Routes>
     <Footer />
   </Router>,
 

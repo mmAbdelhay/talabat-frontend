@@ -43,8 +43,8 @@ export default function MapModal (props) {
 
 
   return (
-    <dev>
-      <Button type="primary" onClick={showModal}>
+    <div>
+      <Button type="primary" style={{width:'120px',height:'40px',borderRadius:'5px'}}  onClick={showModal}>
        Lets Go
       </Button>
       <Modal title="Delivery Address"  visible={isModalVisible}  footer={[
@@ -67,7 +67,7 @@ export default function MapModal (props) {
 				/>
        
       </Modal>
-    </dev>
+    </div>
   );
 };
 

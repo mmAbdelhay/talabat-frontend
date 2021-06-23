@@ -87,7 +87,7 @@ export default function Career() {
           </Form.Item>
           <Form.Item style={{ marginTop: "10px" }}>
             <Button block type="primary" htmlType="submit" onClick={apply}>
-              SignUp
+              Apply
             </Button>
           </Form.Item>
         </Form>

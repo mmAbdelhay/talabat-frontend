@@ -72,17 +72,21 @@ import usePlacesAutocomplete, {
       });
   
     return (
-      <div style={{display: 'inline-block'
+      <div style={{display: 'inline-block',color:'gray'
       }} ref={ref}>
-        <input
+        <input style={{borderRadius:'5px',margin:'5px',height:'40px',width:'500px',fontSize:'16px',padding:'5px',borderStyle:'solid',borderColor:'rgb(166, 166, 166)',borderWidth:'1px'}}
           value={value}
           onChange={handleInput}
           disabled={!ready}
-          placeholder="Where are you going?"
+          placeholder="Where are you going? search for area,street,landmark......."
         />
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
-        {status === "OK" && <ul>{renderSuggestions()}</ul>}
+        {status === "OK" && <ul style={{display: 'inline-block'}}>{renderSuggestions()}</ul>}
       </div>
     );
   };
   export default PlacesAutocomplete;
+
+
+
+  
