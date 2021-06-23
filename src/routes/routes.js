@@ -61,10 +61,11 @@ export default function Routes() {
   }, []);
 
   return (
-    <div className="container">
+      <div>
       <Route path="/" exact>
         {status ? <App /> : <Redirect to="/login" />}
       </Route>
+      <div className="container">
       <Route path="/allDrivers" exact>
         {status && role == "superuser" ? (
           <AllDrivers />
@@ -172,6 +173,7 @@ export default function Routes() {
         path="/review/provider/:prov_name/:prov_id"
         component={ReviewProvider}
       />
+    </div>
     </div>
   );
 }

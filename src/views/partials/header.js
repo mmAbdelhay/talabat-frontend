@@ -23,7 +23,7 @@ export default function Header() {
     window.location.href = "/login";
   };
   return (
-    <Navbar bg="primary" variant="dark" className="mb-4" expand="lg">
+    <Navbar bg="primary" variant="dark"  expand="lg">
       <Navbar.Brand href="/">Talabatak</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">

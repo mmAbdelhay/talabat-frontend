@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import {Row,CardDeck,Card} from "react-bootstrap";
+import {Row,CardDeck,Card,Image} from "react-bootstrap";
 import { checkIfLoggedIn } from "./services/CheckUserStatus";
 import { checkRole } from "./services/CheckUserRole";
 import GetAllMessages from "./views/contactUs/GetAllMessages";
@@ -8,6 +8,7 @@ import MapModal from "./views/map/MapModal";
 import { Link } from "react-router-dom";
 import PlacesAutocomplete from "./views/map/PlacesAutocomplete";
 import { Button } from "antd";
+import AllResturants from './views/providers/allRestaurants';
 
 function App() {
   const [token, setToken] = useState("");
@@ -49,66 +50,72 @@ function App() {
     );
   } else {
     return (
-      <div className="container-fluid" >
+      <div  >
      
      
       <div
-      style={{ marginTop:'250px',
+      style={{ 
       display: "flex",
-      marginBottom:'200px',
+      minHeight:"600px",
       justifyContent: "center",
-      alignItems: "center"}}>
+      alignItems: "center", 
+      marginBottom:80,}} id='main' >
         
       
         
         <PlacesAutocomplete />
         <MapModal operation={"nearprovider"} />
       </div>
-     
-      <Row >
-      <CardDeck>
-  <Card>
-    <Card.Img variant="top" src="holder.js/100px160" />
-    <Card.Body>
-      <Card.Title>Card title</Card.Title>
+     <div >
+      <div className="row" style={{ display: "flex",
+      justifyContent: "center",
+      marginBottom:40}}>
+  <Card className="col-sm-4" style={{marginRight:30,color:'black'}}>
+    
+    <Card.Body className="row">
+      <div className="col">
+      <Card.Title>Resturant</Card.Title>
       <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
+      Find deals, free delivery, and more from our restaurant partners.
+      </Card.Text>
+      <div>
+        <img src="./assets/imgs/flower.jpg" alt="ffff"/>
+      </div>
+      </div>
+    </Card.Body>
+  </Card>
+  <Card className="col-sm-4" style={{marginRight:30,color:'black'}}>
+   
+    <Card.Body>
+      <Card.Title>Grocery</Card.Title>
+      <Card.Text>
+      Don’t stand in line - order online! Choose from top stores delivering groceries to you.
       </Card.Text>
     </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
   </Card>
-  <Card>
-    <Card.Img variant="top" src="holder.js/100px160" />
+  </div>
+  <div className="row" style={{ display: "flex",
+      justifyContent: "center",
+     }}>
+  <Card className="col-sm-4" style={{marginRight:30,color:'black'}}>
+    
     <Card.Body>
-      <Card.Title>Card title</Card.Title>
+      <Card.Title>Flowers</Card.Title>
       <Card.Text>
-        This card has supporting text below as a natural lead-in to additional
-        content.{' '}
+      Show them you care. We're ready to deliver flowers and chocolates to your loved one.
       </Card.Text>
     </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
   </Card>
-  <Card>
-    <Card.Img variant="top" src="holder.js/100px160" />
+  <Card className="col-sm-4" style={{marginRight:30,color:'black'}}>
     <Card.Body>
-      <Card.Title>Card title</Card.Title>
+      <Card.Title>Pharmacy</Card.Title>
       <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This card has even longer content than the first to
-        show that equal height action.
+      Got the sniffles? We’ve got you. Get medicine delivered to you quickly and easily. 
       </Card.Text>
     </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
   </Card>
-        </CardDeck>
-      </Row>
+  </div>
+  </div>
       </div>
     );
   }

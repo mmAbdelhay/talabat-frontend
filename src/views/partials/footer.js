@@ -11,7 +11,7 @@ class Footer extends Component {
 
     return (
 
-      <footer style={{marginTop:250,marginBottom:0}}>
+      <footer style={{marginTop:250}}>
         <div className="column">
         <a className="footer_title">Talabatak</a>
         <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>

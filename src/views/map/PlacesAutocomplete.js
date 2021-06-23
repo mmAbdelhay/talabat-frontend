@@ -74,7 +74,7 @@ import usePlacesAutocomplete, {
     return (
       <div style={{display: 'inline-block',color:'gray'
       }} ref={ref}>
-        <input style={{borderRadius:'5px',margin:'5px',height:'40px',width:'500px',fontSize:'16px',padding:'5px',borderStyle:'solid',borderColor:'rgb(166, 166, 166)',borderWidth:'1px'}}
+        <input style={{borderRadius:'7px',margin:'5px',height:'50px',width:'550px',fontSize:'16px',padding:'5px',borderStyle:'solid',borderColor:'rgb(166, 166, 166)',borderWidth:'1px'}}
           value={value}
           onChange={handleInput}
           disabled={!ready}
