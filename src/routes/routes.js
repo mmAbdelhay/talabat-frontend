@@ -96,9 +96,11 @@ export default function Routes() {
       <Route path="/contactus" exact>
         <ContactUsForm />
       </Route>
-      <Route path="/allRestaurants" exact>
-        <AllResturants />
-      </Route>
+      <Route
+        path="/allProviders/:prov_type"
+        component={AllResturants}
+      />
+
       <Route path="/nearestProvides" exact>
         <AllNearestProviders />
       </Route>

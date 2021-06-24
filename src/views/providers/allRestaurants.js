@@ -15,12 +15,13 @@ class AllResturants extends React.Component{
         currentPage: 1,
         postsPerPage:3,
         error:"",
+        provType:this.props.match.params.prov_type
       };
 
   }
 
   async componentDidMount() {
-    const response = await axios.get(`${ServerIP}/api/v1/guest/restaurants/all`,
+    const response = await axios.get(`${ServerIP}/api/v1/guest/providers/all/${this.state.provType}`,
     
     {}).then((res) => {
      
@@ -28,7 +29,7 @@ class AllResturants extends React.Component{
       console.log(res)
 
       
-    this.setState({restaurants:res.data.All_Restaurants,searchedRests:res.data.All_Restaurants})
+    this.setState({restaurants:res.data.All_Providers,searchedRests:res.data.All_Providers})
     console.log('restranusts' ,this.state.restaurants)
     })
     .catch((err) => {
@@ -87,7 +88,7 @@ class AllResturants extends React.Component{
       console.log('hellooo',this.state.restaurants)
     return (
         <div className="container border pt-2 shadow p-3 mb-5 bg-white rounded">
-          <h3 className="pb-1 pt-1 mb-5" style={{backgroundColor:"#F5F5F5"}}>All Restaurants</h3>
+          <h3 className="pb-1 pt-1 mb-5" style={{backgroundColor:"#F5F5F5"}}>All {this.state.provType}</h3>
           {this.state.restaurants.length?<div className="input-group mb-3" style={{width:"30%"}}>
             <input type="text" className="form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={this.handleSearchChange} value={this.state.searchstring}></input>
           </div>:""}

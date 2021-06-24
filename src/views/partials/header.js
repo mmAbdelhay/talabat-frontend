@@ -28,7 +28,7 @@ export default function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Link className="nav-link text-white " to="/allRestaurants">
+          <Link className="nav-link text-white " to="/allProviders/Restaurant">
             all Restaurants
           </Link>
           {isSuperUser ? (

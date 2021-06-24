@@ -25,7 +25,7 @@ class RestaurantComponent extends React.Component {
             ></img>
           </div>
           <div className="card-body mb-4 border-top">
-            <Link to={`providerprofile/${this.props.id}`}>
+            <Link to={`/providerprofile/${this.props.id}`}>
               <h5 className="card-title" style={{ textAlign: "center" }}>
                 {this.props.name}
               </h5>
