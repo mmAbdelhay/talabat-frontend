@@ -1,1 +1,1 @@
-module.exports.ServerIP = `http://localhost:5000`;
+module.exports.ServerIP = `http://52.15.77.196/`;
