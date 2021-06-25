@@ -3,6 +3,7 @@ import { Row, Col, Card } from "antd";
 import { ServerIP } from "../../assets/config";
 import { Link } from "react-router-dom";
 
+
 const { Meta } = Card;
 
 class RestaurantComponent extends React.Component {

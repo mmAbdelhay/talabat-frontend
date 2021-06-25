@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { checkIfLoggedIn } from "../../services/CheckUserStatus";
 import { checkRole } from "../../services/CheckUserRole";
+import jwt_decode from "jwt-decode";
 export default function Header() {
   const [loginStatus, setLoginStatus] = useState(false);
   const [isSuperUser, setSuperUser] = useState(false);
   const [isProvider, setProvider] = useState(false);
   const [isClient, setClient] = useState(false);
+  const [id, setId] = useState("");
   useEffect(() => {
-    const [isLoggedIn] = checkIfLoggedIn();
+    const [isLoggedIn,token] = checkIfLoggedIn();
+    if(token){
+    let provider_id = jwt_decode(token)._id;
+    console.log(provider_id);
+    setId(provider_id);
+    }
     const role = checkRole();
     if (isLoggedIn) setLoginStatus(true);
     if (role === "superuser") setSuperUser(true);
@@ -93,9 +100,20 @@ export default function Header() {
             </>
           ) : (
             <>
-              <Link to="/myprofile" className="nav-item nav-link">
+
+            {isProvider ? (
+            <>
+              <Link  to={`/providerprofile/${id}`} className="nav-item nav-link">
                 account
               </Link>
+            </>
+          ): (
+            <>
+              <Link  to="/myprofile" className="nav-item nav-link">
+                account
+              </Link>
+            </>
+          )}
               <Link
                 to="/logout"
                 className="nav-item nav-link float-right"
