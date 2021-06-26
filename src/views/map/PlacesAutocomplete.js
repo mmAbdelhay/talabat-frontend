@@ -81,7 +81,7 @@ import usePlacesAutocomplete, {
           placeholder="Where are you going? search for area,street,landmark......."
         />
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
-        {status === "OK" && <ul style={{display: 'inline-block'}}>{renderSuggestions()}</ul>}
+        {status === "OK" && <ul style={{backgroundColor:'white'}}>{renderSuggestions()}</ul>}
       </div>
     );
   };

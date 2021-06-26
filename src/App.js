@@ -146,8 +146,8 @@ function App() {
   </Card>
   </div>
   </div>
-  <h1 className="mx-auto" style={{width: "fit-content",marginTop:"150px"}}>Join us</h1>
-  <div className="mx-auto" style={{width: "fit-content",color:"black"}}>Be a part of Talabatak story</div>
+  <h1 className="mx-auto" style={{width: "fit-content",marginTop:"150px",textAlign:'center'}}>Join us</h1>
+  <div className="mx-auto" style={{width: "fit-content",color:"black",textAlign:'center'}}>Be a part of Talabatak story</div>
 
 
   <div className="row mt-5" style={{ display: "flex",
