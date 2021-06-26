@@ -2,7 +2,7 @@ import React from 'react';
 import "antd/dist/antd.css";
 import axios from "axios";
 import { ServerIP } from "../assets/config";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox , message} from 'antd';
 
 
 
@@ -45,7 +45,9 @@ class ReviewProvider extends React.Component{
             {headers: {
                 Authorization: `Token ${this.state.token}`,
             }}
-        );
+        ).then((res)=>{
+          message.success(`${res.data.Message}`);
+        });
       };
     
       const onFinishFailed = (errorInfo) => {

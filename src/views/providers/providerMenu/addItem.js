@@ -98,20 +98,21 @@ class AddItem extends React.Component{
     ).then((res) => {
       console.log("in then",res.data);
       message.success(`${res.data.Message}`);
+      console.log("in then",res.data);
+
       this.formRef.current.setFieldsValue({
         name: "",
         price:"",
         summary:"",
         category_id:undefined,
       });
+      this.setState({logo:""})
+      if(values.addItemOptions){
+        this.setState({submitted:true});
+      }
     }).catch((res) => {
-      console.log("in catch",res.data);
-      message.error(`${res.data.Message}`);
+      message.error(`${res}`);
     });
-    console.log(values);
-    if(values.addItemOptions){
-      this.setState({submitted:true});
-    }
   }
   };
   
@@ -202,7 +203,7 @@ class AddItem extends React.Component{
             },
           ]}>
               <UploadLogoInput
-                  onUploadLogoInputChange={(value) => this.setState({logo:value})}
+                  value={this.state.logo} onUploadLogoInputChange={(value) => this.setState({logo:value})}
               />
           </Form.Item>
 
