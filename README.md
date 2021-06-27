@@ -35,9 +35,9 @@ With that being said let's discuss the decisions taken in this project.
 
 # Related-repos
 
-BackEnd : https://github.com/aliosman21/Talabat_Backend.git
-Client mobile application : https://github.com/mmAbdelhay/talabat-mobile-client.git
-Driver mobile application : https://github.com/mmAbdelhay/talabat-mobile-driver.git
+- BackEnd : https://github.com/aliosman21/Talabat_Backend.git
+- Client mobile application : https://github.com/mmAbdelhay/talabat-mobile-client.git
+- Driver mobile application : https://github.com/mmAbdelhay/talabat-mobile-driver.git
 
 # Authors
 
