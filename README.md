@@ -1,4 +1,4 @@
-<img src="./public/logo.png" align="right" width="27%" style="margin-top:15px"/>
+<img src="./public/logo.png" align="right" width="27%" style="margin-top:15px; background-color:white; border-raduis:10px"/>
 
 # Talabatak
 
