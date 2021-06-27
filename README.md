@@ -8,7 +8,7 @@ it's an online ordering application and this is its frontEnd
 
 - ### [Introduction](#Introduction) :microphone:
 - ### [Installation steps](#Getting-Started) :memo:
-- ### [Related repos] (#Related-Repos)
+- ### [Related repos](#Related-Repos)
 - ### [Authors](#Authors) :thinking:
 - ### [License](#License) :closed_book:
 
