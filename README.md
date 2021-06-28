@@ -28,6 +28,9 @@ With that being said let's discuss the decisions taken in this project.
     1.	Make sure that Git is installed.
     2.	Open the terminal in an empty directory and type $ git clone https://github.com/mmAbdelhay/talabat-frontend.git
     3.	Once it’s done make sure you have Node and NPM installed
+        note that you have to get a new google api key (geocode & maps for js & places)
+        and place it in public/index.html in last script tag and in src/views/map/client-config.js
+        inorder to have you map and autocomplete of your address work smoothly
     4.	Open the directory that appeared and in the terminal type $ npm install
     5.	make sure your backend is on
     6.	Open src/assets/config type your backend ip (if you want to run it to the backend installed on your localhost so it will be http://localhaost: and the port that your backend listening on)
